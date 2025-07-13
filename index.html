@@ -1,0 +1,1559 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop plays Kiming</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --card-bg: #f5f5f5;
+            --button-bg: #2196F3;
+            --button-hover: #1976D2;
+            --clan-button-bg: #2196F3;
+            --clan-button-hover: #1976D2;
+            --support-button-bg: #4CAF50;
+            --support-button-hover: #388E3C;
+            --highlight-color: #2196F3;
+            --telegram-color: #0088cc;
+            --error-color: #f44336;
+            --success-color: #4CAF50;
+            --vodafone-red: #E40000;
+            --whatsapp-green: #25D366;
+        }
+
+        .dark-mode {
+            --bg-color: #121212;
+            --text-color: #f1f1f1;
+            --card-bg: #1e1e1e;
+            --button-bg: #42A5F5;
+            --button-hover: #1E88E5;
+            --clan-button-bg: #42A5F5;
+            --clan-button-hover: #1E88E5;
+            --support-button-bg: #2E7D32;
+            --support-button-hover: #1B5E20;
+            --highlight-color: #42A5F5;
+            --error-color: #e53935;
+            --success-color: #43A047;
+            --vodafone-red: #FF3333;
+            --whatsapp-green: #128C7E;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 10px;
+            background-color: var(--bg-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background-image: url('https://i.postimg.cc/fRjpkyTb/IMG.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            border: 2px solid var(--highlight-color);
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .highlight {
+            color: var(--highlight-color);
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .dark-mode-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--card-bg);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-color);
+        }
+
+        .clan-button {
+            background-color: var(--clan-button-bg);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+        }
+
+        .support-button {
+            background-color: var(--support-button-bg);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+        }
+
+        .clan-button:hover {
+            background-color: var(--clan-button-hover);
+        }
+
+        .support-button:hover {
+            background-color: var(--support-button-hover);
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        .main-title {
+            text-align: center;
+            margin: 15px 0 25px;
+            font-size: 22px;
+            color: var(--text-color);
+            background: var(--card-bg);
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .main-title span {
+            color: var(--highlight-color);
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(33, 150, 243, 0.2);
+            cursor: pointer;
+        }
+        .gem-icon {
+            width: 80px;
+            height: 50px;
+            margin: 0 auto 10px;
+             display: block;
+        } 
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            border-color: var(--highlight-color);
+        }
+
+        .card h2 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--button-bg);
+            margin: 5px 0;
+            text-align: center;
+        }
+        
+
+        img {
+           -webkit-user-select: none;
+           -moz-user-select: none;
+           -ms-user-select: none;
+           user-select: none;
+           pointer-events: none; 
+       }
+
+
+       .card, button {
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+}
+
+        .method {
+            font-size: 12px;
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .buy-button {
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            padding: 8px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin-top: auto;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .buy-button:hover {
+            background-color: var(--button-hover);
+        }
+
+        .payment-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            display: none;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            z-index: 1000;
+            padding: 15px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .payment-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            border: 1px solid rgba(33, 150, 243, 0.3);
+        }
+
+        .payment-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--highlight-color);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        .vodafone-cash-box {
+            background: rgba(228, 0, 0, 0.1);
+            border: 2px dashed var(--vodafone-red);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vodafone-cash-box::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 30px;
+            height: 30px;
+            background: var(--vodafone-red);
+            transform: rotate(45deg);
+            z-index: 1;
+        }
+
+        .vodafone-number {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--vodafone-red);
+            direction: ltr;
+            display: inline-block;
+            background: var(--bg-color);
+            padding: 5px 15px;
+            border-radius: 30px;
+            margin: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .copy-btn {
+            background: var(--vodafone-red);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px 0;
+            transition: all 0.3s;
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+        }
+
+        .copy-btn:hover {
+            background: #c10000;
+            transform: translateY(-2px);
+        }
+
+        .payment-steps {
+            margin: 20px 0;
+            padding-right: 20px;
+        }
+
+        .payment-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .step-number {
+            background: var(--highlight-color);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex-grow: 1;
+        }
+
+        .payment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: var(--text-color);
+            font-size: 14px;
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--highlight-color);
+            box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 12px;
+            margin-top: 3px;
+            display: none;
+        }
+
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload-btn {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .file-upload-btn:hover {
+            border-color: var(--highlight-color);
+            background-color: rgba(33, 150, 243, 0.05);
+        }
+
+        .file-upload-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-name {
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        .submit-btn {
+            background-color: var(--telegram-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--button-hover);
+        }
+
+        .submit-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .close-payment {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            z-index: 1001;
+        }
+
+        .confirmation-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .confirmation-icon {
+            font-size: 60px;
+            color: var(--success-color);
+            margin-bottom: 20px;
+        }
+
+        .confirmation-screen h2 {
+            color: var(--success-color);
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .confirmation-screen p {
+            color: var(--text-color);
+            margin-bottom: 30px;
+            font-size: 16px;
+            max-width: 300px;
+        }
+
+        .clan-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            display: none;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .clan-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .clan-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--highlight-color);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        .clan-image {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid var(--highlight-color);
+        }
+
+        .clan-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .support-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .support-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        .support-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--highlight-color);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        .support-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .support-name {
+            font-weight: bold;
+        }
+
+        .support-number {
+            direction: ltr;
+            display: inline-block;
+        }
+
+        .whatsapp-btn {
+            background-color: var(--whatsapp-green);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+        }
+
+        .whatsapp-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .close-support {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text-color);
+        }
+
+        .close-clan {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text-color);
+        }
+
+        @media (max-width: 480px) {
+            .payment-card {
+                padding: 15px;
+            }
+            
+            .form-group input, 
+            .form-group select, 
+            .form-group textarea {
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+            .payment-title {
+                font-size: 20px;
+            }
+            
+            .submit-btn {
+                padding: 12px;
+                font-size: 15px;
+            }
+            
+            .vodafone-number {
+                font-size: 18px;
+            }
+            
+            .controls {
+                gap: 5px;
+            }
+            
+            .clan-button,
+            .support-button {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 700px;
+            }
+            
+            .cards {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .card h2 {
+                font-size: 18px;
+            }
+            
+            .price {
+                font-size: 22px;
+            }
+            
+            .main-title {
+                font-size: 26px;
+            }
+            
+            .logo-text {
+                font-size: 20px;
+            }
+        }
+
+        .copy-notification {
+           position: fixed;
+           bottom: 20px;
+           left: 50%;
+           transform: translateX(-50%);
+           background-color: #4CAF50;
+           color: white;
+           padding: 12px 24px;
+           border-radius: 4px;
+           box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+           z-index: 1000;
+           opacity: 0;
+           transition: opacity 0.3s ease;
+       }
+    
+       .copy-notification.show {
+          opacity: 1;
+       }
+       
+
+       .control-button {
+          border: none;
+          padding: 8px 16px;
+          border-radius: 0; 
+          cursor: pointer;
+          font-size: 13px;
+          font-weight: bold;
+          transition: all 0.3s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+          white-space: nowrap;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          position: relative;
+          overflow: hidden;
+          height: 36px;
+          min-width: 100px;
+       }
+
+       .control-button::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+          transition: 0.5s;
+       }
+
+       .control-button:hover::before {
+          left: 100%;
+       }
+
+       .control-button:active {
+          transform: scale(0.98);
+       }
+
+       .support-button {
+          background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+          color: white;
+       }
+
+       .clan-button {
+          background: linear-gradient(135deg, #2196F3 0%, #0D47A1 100%);
+          color: white;
+       }
+
+       .control-button svg {
+          width: 16px;
+          height: 16px;
+          flex-shrink: 0;
+       }
+
+      .dark-mode .support-button {
+          background: linear-gradient(135deg, #388E3C 0%, #1B5E20 100%);
+      }
+
+      .dark-mode .clan-button {
+          background: linear-gradient(135deg, #1976D2 0%, #0D47A1 100%);
+      }
+
+      body {
+          user-select: none;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+      }
+
+      input, textarea, [contenteditable] {
+          user-select: text;
+          -webkit-user-select: text;
+          -moz-user-select: text;
+          -ms-user-select: text;
+      }
+    
+
+      .card {
+          -webkit-tap-highlight-color: transparent; 
+          tap-highlight-color: transparent; 
+          user-select: none; 
+      }
+
+      .card:active {
+          background-color: inherit !important; 
+      }
+      .card {
+          -webkit-tap-highlight-color: transparent;
+          tap-highlight-color: transparent;
+      }
+
+      button, .btn {
+          -webkit-tap-highlight-color: transparent;
+          tap-highlight-color: transparent;
+     }
+    
+     .clan-button, 
+     .support-button {
+         border-radius: 12px; /* زوايا مدورة بشكل معتدل */
+         padding: 4px 12px; /* حافظ على الحجم الأصلي مع تعديل بسيط */
+         
+    }
+
+    .clan-button:hover, 
+    .support-button:hover {
+       transform: translateY(-2px);
+       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .clan-button, 
+    .support-button {
+       border-radius: 10px; /* يمكنك زيادة هذه القيمة لمزيد من الانحناء */
+    } 
+    
+    .card:active, 
+    button:active, 
+    .buy-button:active {
+        transform: none !important;
+        animation: none !important;
+    }
+
+   .card:active, 
+   button:active {
+       transform: scale(0.97);
+       transition: transform 0.1s;
+   }
+   
+   .card:active, 
+      button:active {
+      transform: scale(0.95);
+      transition: transform 0.05s;
+   }
+
+   .card, button {
+      user-select: none;
+       -webkit-user-select: none;
+   }
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-modern-click-box-check-1120.mp3" preload="auto"></audio>
+
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo"></div>
+            <div class="logo-text"><span class="highlight">شوب بلاي</span></div>
+        </div>
+        <div class="controls">
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1-8.313-12.454z"/>
+                </svg>
+            </button>
+            <button class="support-button" onclick="showSupportScreen()">الدعم الفني</button>
+            <button class="clan-button" onclick="showClanScreen()">انضمام للكلان</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="main-title">شحن جواهر فري فاير <span>بأسعار مميزة</span></h1>
+        
+        <div class="cards">
+            <div class="card" onclick="showPayment('50 جوهرة', '30 جنيه')">
+                <h2>50 جوهرة</h2>
+                <img src="https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png" alt="جوهرة" class="gem-icon">
+                <div class="price">30 جنيه</div>
+                <div class="method">الشحن: عبر الأيدي</div>
+                <button class="buy-button">شراء الآن</button>
+            </div>
+            
+            <div class="card" onclick="showPayment('100 جوهرة', '50 جنيه')">
+                <h2>100 جوهرة</h2>
+                <img src="https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png" alt="جوهرة" class="gem-icon">
+                <div class="price">50 جنيه</div>
+                <div class="method">الشحن: عبر الأيدي</div>
+                <button class="buy-button">شراء الآن</button>
+            </div>
+            
+            <div class="card" onclick="showPayment('210 جوهرة', '110 جنيه')">
+                <h2>210 جوهرة</h2>
+                <img src="https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png" alt="جوهرة" class="gem-icon">
+                <div class="price">100 جنيه</div>
+                <div class="method">الشحن: عبر الأيدي</div>
+                <button class="buy-button">شراء الآن</button>
+            </div>
+            
+            <div class="card" onclick="showPayment('320 جوهرة', '160 جنيه')">
+                <h2>320 جوهرة</h2>
+                <img src="https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png" alt="جوهرة" class="gem-icon">
+                <div class="price">160 جنيه</div>
+                <div class="method">الشحن: عبر الأيدي</div>
+                <button class="buy-button">شراء الآن</button>
+            </div>
+            
+            <div class="card" onclick="showPayment('520 جوهرة', '260 جنيه')">
+                <h2>520 جوهرة</h2>
+                <img src="https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png" alt="جوهرة" class="gem-icon">
+                <div class="price">260 جنيه</div>
+                <div class="method">الشحن: عبر الأيدي</div>
+                <button class="buy-button">شراء الآن</button>
+            </div>
+            
+            <div class="card" onclick="showPayment('1060 جوهرة', '520 جنيه')">
+                <h2>1060 جوهرة</h2>
+                <img src="https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png" alt="جوهرة" class="gem-icon">
+                <div class="price">520 جنيه</div>
+                <div class="method">الشحن: عبر الأيدي</div>
+                <button class="buy-button">شراء الآن</button>
+            </div>
+            
+            <div class="card" onclick="showPayment('1060 جوهرة', '520 جنيه')">
+                <h2>2200 جوهرة</h2>
+                <img src="https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png" alt="جوهرة" class="gem-icon">
+                <div class="price">1050 جنيه</div>
+                <div class="method">الشحن: عبر الأيدي</div>
+                <button class="buy-button">شراء الآن</button>
+            </div>
+            
+            <div class="card" onclick="showPayment('عرض شهري', 'السعر')">
+                <h2>عرض شهري</h2>
+                <img src="https://i.postimg.cc/K87kPGpN/Picsart-25-07-10-13-49-30-174.png" alt="جوهرة" class="gem-icon">
+                <div class="price">؟؟؟ جنيه</div>
+                <div class="method">الشحن: عبر الحساب</div>
+                <button class="buy-button">شراء الآن</button>
+            </div>
+    
+             <div class="card" onclick="showPayment('عرض اسبوعي', 'السعر')">
+                 <h2>عرض اسبوعي</h2>
+                 <img src="https://i.postimg.cc/W4nZvNM3/Picsart-25-07-10-16-32-08-514.png" alt="جوهرة" class="gem-icon">
+                 <div class="price">؟؟؟ جنيه</div>
+                 <div class="method">الشحن: عبر الحساب</div>
+                 <button class="buy-button">شراء الآن</button>
+            </div>
+    
+             <div class="card" onclick="showPayment('بويا باس', '؟؟؟ ')">
+                 <h2>بويا باس</h2>
+                 <img src="https://i.postimg.cc/VkP00rgv/Picsart-25-07-10-16-30-49-185.png" alt="جوهرة" class="gem-icon">
+                 <div class="price">؟؟؟ جنيه</div>
+                 <div class="method">الشحن: عبر الحساب</div>
+                 <button class="buy-button">شراء الآن</button>
+             </div>
+    
+            <div class="card" onclick="showPayment('عرض اسبوعي مخفف', 'السعر')">
+                <h2>عرض اسبوعي مخفف</h2>
+                <img src="https://i.postimg.cc/W4nZvNM3/Picsart-25-07-10-16-32-08-514.png" alt="جوهرة" class="gem-icon">
+               <div class="price">؟؟؟ جنيه</div>
+               <div class="method">الشحن: عبر الحساب</div>
+               <button class="buy-button">شراء الآن</button>
+             </div>
+            
+        </div>
+    </div>
+
+
+    <div class="payment-screen" id="paymentScreen">
+        <button class="close-payment" onclick="hidePayment()">✕</button>
+        <div class="payment-card">
+            <h2 class="payment-title">إتمام عملية الشراء</h2>
+            
+            <div class="vodafone-cash-box">
+                <h3>الدفع عبر فودافون كاش</h3>
+                <p>قم بالتحويل إلى الرقم التالي:</p>
+                <div class="vodafone-number" id="vodafoneNumber">+201070405848</div>
+                
+                <p style="margin-top: 10px;">استخدمه لشحن عبر الأيدي</p>
+            </div>
+
+            <div class="payment-steps">
+                <div class="payment-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <strong>قم بالتحويل</strong>
+                        <p>استخدم الرقم المكتوب للتحويل قبل اتمام الدفع</p>
+                    </div>
+                </div>
+                <div class="payment-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <strong>أدخل البينات المطلوبه</strong>
+                        <p>املأ البينات المطلوبه بلأسفل</p>
+                    </div>
+                </div>
+                <div class="payment-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <strong>ضع صوره اثبات التحويل</strong>
+                        <p>لضمان نجاح طلبك اسرع</p>
+                    </div>
+                </div>
+            </div>
+
+            <form class="payment-form" id="paymentForm">
+                <input type="hidden" id="productNameInput">
+                <input type="hidden" id="productPriceInput">
+                
+                <div class="form-group">
+                    <label for="playerName">اسم اللاعب في فري فاير:</label>
+                    <input type="text" id="playerName" required>
+                    <div class="error-message" id="playerNameError">يجب إدخال اسم اللاعب</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="playerId">الأيدي الخاص بك:</label>
+                    <input type="text" id="playerId" required minlength="8" maxlength="13" pattern="[0-9]+">
+                    <div class="error-message" id="playerIdError">يرجي التحقق من الأيدي</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phoneNumber">رقم الهاتف</label>
+                    <div style="display: flex; align-items: center;">
+                        <input type="tel" id="phoneNumber" style="border-radius: 0 8px 8px 0; flex-grow: 1;" placeholder="01XXXXXXXXX">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="transactionNumber">رقم التحويل في فودافون كاش:</label>
+                    <input type="text" id="transactionNumber" required>
+                    <div class="error-message" id="transactionError">يجب إدخال رقم التحويل</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="screenshot">صورة إثبات التحويل:</label>
+                    <div class="file-upload">
+                        <label class="file-upload-btn">
+                            <span>اضغط لرفع صورة التحويل</span>
+                            <input type="file" id="screenshot" accept="image/*" required class="file-upload-input" onchange="showFileName(this)">
+                        </label>
+                        <div class="file-name" id="fileName">لم يتم اختيار صورة</div>
+                    </div>
+                    <div class="error-message" id="screenshotError">يجب رفع صورة التحويل</div>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                    </svg>
+                    تأكيد الطلب وإرسال البيانات
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="confirmation-screen" id="confirmationScreen">
+        <div class="confirmation-icon">✓</div>
+        <h2>تم تأكيد طلبك بنجاح!</h2>
+        <p>تم إرسال طلبك الي المسؤلين عاده مايستغرق بين نصف ساعه او ساعه</p>
+        <button class="buy-button" onclick="hideConfirmation()" style="width: 200px; margin-top: 20px;">العوده الي المتجر</button>
+    </div>
+
+    <!-- شاشة الدعم الفني -->
+    <div class="support-screen" id="supportScreen">
+        <button class="close-support" onclick="hideSupportScreen()">✕</button>
+        <div class="support-card">
+            <h2 class="support-title">الدعم الفني</h2>
+            
+            <div class="support-item">
+                <div>
+                    <div class="support-name">كَوُبّـــــــرا</div>
+                    <div class="support-number">+201505977367</div>
+                </div>
+                <button class="whatsapp-btn" onclick="openWhatsApp('201505977367')">
+                    <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    واتساب
+                </button>
+            </div>
+            
+            <div class="support-item">
+                <div>
+                    <div class="support-name">ًسًــــــــندال</div>
+                    <div class="support-number">+201108902465</div>
+                </div>
+                <button class="whatsapp-btn" onclick="openWhatsApp('201108902465')">
+                    <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    واتساب
+                </button>
+            </div>
+            
+            <div class="support-item">
+                <div>
+                    <div class="support-name">كيـــــــّنج</div>
+                    <div class="support-number">+201100267318</div>
+                </div>
+                <button class="whatsapp-btn" onclick="openWhatsApp('201100267318')">
+                    <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    واتساب
+                </button>
+            </div>
+            
+            <div class="support-item">
+                <div>
+                    <div class="support-name">كويـــــــّن</div>
+                    <div class="support-number">+201070405848</div>
+                </div>
+                <button class="whatsapp-btn" onclick="openWhatsApp('201070405848')">
+                    <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    واتساب
+                </button>
+            </div>
+            
+            <div class="support-item">
+                <div>
+                    <div class="support-name">GAMA</div>
+                    <div class="support-number">+201011907743</div>
+                </div>
+                <button class="whatsapp-btn" onclick="openWhatsApp('201011907743')">
+                    <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    واتساب
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="clan-screen" id="clanScreen">
+        <button class="close-clan" onclick="hideClanScreen()">✕</button>
+        <div class="clan-card">
+            <h2 class="clan-title">انضمام للكلان</h2>
+            <img src="https://i.postimg.cc/T1CQfvYt/IMG-20250705-WA0108.jpg" alt="صورة الكلان" class="clan-image">
+            
+            <form class="clan-form" id="clanForm">
+                <div class="form-group">
+                    <label for="clanPlayerName">اسم اللاعب في فري فاير:</label>
+                    <input type="text" id="clanPlayerName" required>
+                    <div class="error-message" id="clanPlayerNameError">يجب إدخال اسم اللاعب</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="clanPlayerId">الأيدي الخاص بك:</label>
+                    <input type="text" id="clanPlayerId" required minlength="8" maxlength="13" pattern="[0-9]+">
+                    <div class="error-message" id="clanPlayerIdError">يرجي التحقق من الأيدي</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="clanPhoneNumber">رقم الهاتف </label>
+                    <input type="tel" id="clanPhoneNumber" placeholder="01XXXXXXXXX">
+                </div>
+                
+                <button type="submit" class="submit-btn" id="clanSubmitBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                    </svg>
+                    إرسال طلب الانضمام
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+    // Telegram Bot Token
+    const BOT_TOKEN = '8124725346:AAGd1EfsXw0A9pJnCDcXbxJZ8WN12ObYk1E';
+    // قائمة بآيدي المشرفين
+    const ADMIN_CHAT_IDS = [
+        '7854377544',
+        '6222410034',
+        '5895171952',
+        '1542697660',
+        '7811697201',
+        '6396743884',
+    ];
+    
+
+    let currentProduct = '';
+    let currentPrice = '';
+    
+    
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+    }
+    
+
+    
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    }
+    
+    function showPayment(product, price) {
+        console.log("Opening payment for:", product, price);
+        try {
+            currentProduct = product;
+            currentPrice = price;
+            document.getElementById('productNameInput').value = product;
+            document.getElementById('productPriceInput').value = price;
+            document.getElementById('paymentScreen').style.display = 'flex';
+            resetForm();
+        } catch (e) {
+            console.error("Error in showPayment:", e);
+        }
+    }
+    
+    function hidePayment() {
+        document.getElementById('paymentScreen').style.display = 'none';
+    }
+    
+    function showConfirmation() {
+        document.getElementById('confirmationScreen').style.display = 'flex';
+    }
+    
+    function hideConfirmation() {
+        document.getElementById('confirmationScreen').style.display = 'none';
+        hidePayment();
+    }
+    
+    function showSupportScreen() {
+        document.getElementById('supportScreen').style.display = 'flex';
+    }
+    
+    function hideSupportScreen() {
+        document.getElementById('supportScreen').style.display = 'none';
+    }
+    
+    function showClanScreen() {
+        document.getElementById('clanScreen').style.display = 'flex';
+    }
+    
+    function hideClanScreen() {
+        document.getElementById('clanScreen').style.display = 'none';
+    }
+    
+    function copyVodafoneNumber() {
+        const number = document.getElementById('vodafoneNumber').textContent;
+        const notification = document.getElementById('copyNotification');
+    
+        navigator.clipboard.writeText(number).then(() => {
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+            alert('حدث خطأ أثناء نسخ الرقم');
+        });
+    }
+    
+    function openWhatsApp(phone) {
+        window.open(`https://wa.me/${phone}`, '_blank');
+    }
+    
+    function showFileName(input) {
+        const fileNameDisplay = document.getElementById('fileName');
+        if (input.files && input.files[0]) {
+            fileNameDisplay.textContent = input.files[0].name;
+            document.getElementById('screenshotError').style.display = 'none';
+        } else {
+            fileNameDisplay.textContent = 'لم يتم اختيار صورة';
+        }
+    }
+    
+    function resetForm() {
+        document.getElementById('paymentForm').reset();
+        document.getElementById('fileName').textContent = 'لم يتم اختيار صورة';
+        document.querySelectorAll('.error-message').forEach(el => {
+            el.style.display = 'none';
+        });
+    }
+    
+    // التحقق من صحة النموذج قبل الإرسال
+    function validateForm() {
+        let isValid = true;
+        
+        const playerName = document.getElementById('playerName').value.trim();
+        if (playerName === '') {
+            document.getElementById('playerNameError').style.display = 'block';
+            isValid = false;
+        } else {
+            document.getElementById('playerNameError').style.display = 'none';
+        }
+        
+        const playerId = document.getElementById('playerId').value.trim();
+        if (playerId.length < 8 || playerId.length > 13 || !/^\d+$/.test(playerId)) {
+            document.getElementById('playerIdError').style.display = 'block';
+            isValid = false;
+        } else {
+            document.getElementById('playerIdError').style.display = 'none';
+        }
+        
+        const transactionNumber = document.getElementById('transactionNumber').value.trim();
+        if (transactionNumber === '') {
+            document.getElementById('transactionError').style.display = 'block';
+            isValid = false;
+        } else {
+            document.getElementById('transactionError').style.display = 'none';
+        }
+        
+        const screenshot = document.getElementById('screenshot').files[0];
+        if (!screenshot) {
+            document.getElementById('screenshotError').style.display = 'block';
+            isValid = false;
+        } else {
+            document.getElementById('screenshotError').style.display = 'none';
+        }
+        
+        return isValid;
+    }
+
+    // التحقق من صحة نموذج الكلان
+    function validateClanForm() {
+        let isValid = true;
+        
+        const playerName = document.getElementById('clanPlayerName').value.trim();
+        if (playerName === '') {
+            document.getElementById('clanPlayerNameError').style.display = 'block';
+            isValid = false;
+        } else {
+            document.getElementById('clanPlayerNameError').style.display = 'none';
+        }
+        
+        const playerId = document.getElementById('clanPlayerId').value.trim();
+        if (playerId.length < 8 || playerId.length > 13 || !/^\d+$/.test(playerId)) {
+            document.getElementById('clanPlayerIdError').style.display = 'block';
+            isValid = false;
+        } else {
+            document.getElementById('clanPlayerIdError').style.display = 'none';
+        }
+        
+        return isValid;
+    }
+    
+    // إعداد أحداث النقر بعد تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+        // إعداد أحداث النقر على البطاقات
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function(e) {
+
+                if (e.target.classList.contains('buy-button')) {
+                    return;
+                }
+                
+                const title = this.querySelector('h2').textContent.trim();
+                const price = this.querySelector('.price').textContent.trim();
+                
+                console.log("Card clicked:", title, price);
+                showPayment(title, price);
+            });
+        });
+        
+        console.log("DOM fully loaded and parsed");
+    });
+    
+    // إرسال البيانات إلى Telegram
+    document.getElementById('paymentForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        if (!validateForm()) return;
+
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0020 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74A7.93 7.93 0 004 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg> جاري الإرسال...';
+
+        const orderData = {
+            product: currentProduct,
+            price: currentPrice,
+            playerName: document.getElementById('playerName').value.trim(),
+            playerId: document.getElementById('playerId').value.trim(),
+            phoneNumber: document.getElementById('phoneNumber').value.trim() ? '+' + document.getElementById('phoneNumber').value.trim() : 'غير مدخل',
+            transactionNumber: document.getElementById('transactionNumber').value.trim(),
+            screenshot: document.getElementById('screenshot').files[0]
+        };
+
+        let message = ` *طلب شحن جواهر جديد* \n\n`;
+        message += ` *يرجي ارسال هذه الرساله الي الجروب الطلبات* \n`;
+        message += ` *المنتج:* ${orderData.product}\n`;
+        message += ` *السعر:* ${orderData.price}\n\n`;
+        message += ` *اسم اللاعب:* ${orderData.playerName}\n`;
+        message += ` *الأيدي:* ${orderData.playerId}\n`;
+        message += ` *رقم الهاتف:* ${orderData.phoneNumber}\n\n`;
+        message += ` *طريقة الدفع:* فودافون كاش\n`;
+        message += ` *رقم التحويل:* ${orderData.transactionNumber}\n\n`;
+        message += ` *رقم فودافون كاش:* +201070405848\n\n`;
+        message += ` *وقت الطلب:* ${new Date().toLocaleString('ar-EG')}`;
+
+        try {
+            // إرسال الرسالة النصية لكل المشرفين
+            const textPromises = ADMIN_CHAT_IDS.map(chatId => {
+                return fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+            });
+
+            let photoPromises = [];
+            if (orderData.screenshot) {
+                photoPromises = ADMIN_CHAT_IDS.map(chatId => {
+                    const formData = new FormData();
+                    formData.append('chat_id', chatId);
+                    formData.append('photo', orderData.screenshot);
+                    formData.append('caption', 'إثبات الدفع للطلب أعلاه');
+                    return fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                });
+            }
+
+            await Promise.all([...textPromises, ...photoPromises]);
+            showConfirmation();
+        } catch (error) {
+            console.error('Error:', error);
+            alert('حدث خطأ أثناء إرسال البيانات، يرجى المحاولة مرة أخرى');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+                تأكيد الطلب وإرسال البيانات
+            `;
+        }
+    });
+
+    // إرسال طلب الانضمام للكلان
+    document.getElementById('clanForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        if (!validateClanForm()) return;
+
+        const submitBtn = document.getElementById('clanSubmitBtn');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0020 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74A7.93 7.93 0 004 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg> جاري الإرسال...';
+
+        const clanData = {
+            playerName: document.getElementById('clanPlayerName').value.trim(),
+            playerId: document.getElementById('clanPlayerId').value.trim(),
+            phoneNumber: document.getElementById('clanPhoneNumber').value.trim() ? '+' + document.getElementById('clanPhoneNumber').value.trim() : 'غير مدخل'
+        };
+
+        let message = ` *طلب انضمام للكلان جديد* \n\n`;
+        message += ` *اسم اللاعب:* ${clanData.playerName}\n`;
+        message += ` *الأيدي:* ${clanData.playerId}\n`;
+        message += ` *رقم الهاتف:* ${clanData.phoneNumber}\n\n`;
+        message += ` *وقت الطلب:* ${new Date().toLocaleString('ar-EG')}`;
+
+        try {
+            const promises = ADMIN_CHAT_IDS.map(chatId => {
+                return fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+            });
+            
+            await Promise.all(promises);
+            
+            showConfirmation();
+            hideClanScreen();
+        } catch (error) {
+            console.error('Error:', error);
+            alert('حدث خطأ أثناء إرسال البيانات، يرجى المحاولة مرة أخرى');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> إرسال طلب الانضمام';
+        }
+    });
+    
+    </script>
+</body>
+</html>
