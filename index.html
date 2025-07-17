@@ -95,6 +95,7 @@
         .controls {
             display: flex;
             gap: 10px;
+            align-items: center;
         }
 
         .dark-mode-toggle {
@@ -117,38 +118,105 @@
             fill: var(--text-color);
         }
 
-        .clan-button {
-            background-color: var(--clan-button-bg);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
+        /* القائمة الجانبية */
+        .menu-container {
+            position: relative;
+        }
+
+        .menu-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-            white-space: nowrap;
-        }
-
-        .support-button {
-            background-color: var(--support-button-bg);
-            color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-line {
+            width: 20px;
+            height: 2px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .menu-button.active .menu-line:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .menu-button.active .menu-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-button.active .menu-line:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        .menu-dropdown {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            width: 200px;
+            opacity: 0;
+            transform: translateX(20px);
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .menu-dropdown.active {
+            opacity: 1;
+            transform: translateX(0);
+            visibility: visible;
+        }
+
+        .menu-item {
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 5px;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(33, 150, 243, 0.1);
+        }
+
+        .menu-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .menu-item svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--highlight-color);
+        }
+
+        .menu-item span {
             font-size: 14px;
+            font-weight: 500;
+        }
+
+        .menu-title {
+            text-align: center;
+            font-size: 16px;
             font-weight: bold;
-            transition: background-color 0.3s;
-            white-space: nowrap;
-        }
-
-        .clan-button:hover {
-            background-color: var(--clan-button-hover);
-        }
-
-        .support-button:hover {
-            background-color: var(--support-button-hover);
+            margin-bottom: 15px;
+            color: var(--highlight-color);
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(33, 150, 243, 0.3);
         }
 
         .container {
@@ -172,6 +240,70 @@
             color: var(--highlight-color);
             font-weight: bold;
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* أضف هذه الأنماط الجديدة */
+        .game-selector {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            scrollbar-width: none;
+        }
+
+        .game-selector::-webkit-scrollbar {
+            display: none;
+        }
+
+        .game-option {
+            min-width: 100px;
+            height: 120px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .game-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .game-option.active {
+            border-color: var(--highlight-color);
+            background-color: rgba(33, 150, 243, 0.1);
+        }
+
+        .game-icon {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 8px;
+        }
+
+        .game-name {
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .game-banner {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 2px solid var(--highlight-color);
         }
 
         .cards {
@@ -234,17 +366,17 @@
           -moz-user-select: none;
           -ms-user-select: none;
           user-select: none;
-}
+       }
 
-        .method {
+       .method {
             font-size: 12px;
             color: var(--text-color);
             opacity: 0.8;
             margin-bottom: 15px;
             text-align: center;
-        }
+       }
 
-        .buy-button {
+       .buy-button {
             background-color: var(--button-bg);
             color: white;
             border: none;
@@ -257,13 +389,13 @@
             transition: background-color 0.3s;
             margin-top: auto;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+       }
 
-        .buy-button:hover {
+       .buy-button:hover {
             background-color: var(--button-hover);
-        }
+       }
 
-        .payment-screen {
+       .payment-screen {
             position: fixed;
             top: 0;
             left: 0;
@@ -278,9 +410,9 @@
             padding: 15px;
             box-sizing: border-box;
             overflow-y: auto;
-        }
+       }
 
-        .payment-card {
+       .payment-card {
             background-color: var(--card-bg);
             border-radius: 15px;
             padding: 20px;
@@ -289,18 +421,56 @@
             box-shadow: 0 6px 15px rgba(0,0,0,0.1);
             margin-top: 20px;
             border: 1px solid rgba(33, 150, 243, 0.3);
-        }
+       }
 
-        .payment-title {
+       .payment-title {
             font-size: 22px;
             margin-bottom: 20px;
             color: var(--text-color);
             border-bottom: 2px solid var(--highlight-color);
             padding-bottom: 10px;
             text-align: center;
-        }
+       }
+       
+       /* تحسينات شاشة الدفع */
+.payment-card {
+    animation: fadeInUp 0.5s ease-out;
+}
 
-        .vodafone-cash-box {
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.vodafone-cash-box {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(228, 0, 0, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(228, 0, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(228, 0, 0, 0); }
+}
+
+/* تحسين مربع رفع الصورة */
+.file-upload-btn {
+    transition: all 0.3s ease;
+    border: 2px dashed var(--highlight-color);
+    background-color: rgba(33, 150, 243, 0.05);
+}
+
+.file-upload-btn:hover {
+    background-color: rgba(33, 150, 243, 0.1);
+    transform: translateY(-2px);
+}
+
+       .vodafone-cash-box {
             background: rgba(228, 0, 0, 0.1);
             border: 2px dashed var(--vodafone-red);
             border-radius: 10px;
@@ -309,21 +479,21 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-        }
+       }
+       
+       .loading-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background-color: var(--highlight-color);
+    z-index: 9999;
+    transition: width 0.3s ease;
+    box-shadow: 0 1px 3px rgba(33, 150, 243, 0.5);
+       } 
 
-        .vodafone-cash-box::before {
-            content: "";
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            width: 30px;
-            height: 30px;
-            background: var(--vodafone-red);
-            transform: rotate(45deg);
-            z-index: 1;
-        }
-
-        .vodafone-number {
+       .vodafone-number {
             font-size: 22px;
             font-weight: bold;
             color: var(--vodafone-red);
@@ -334,9 +504,9 @@
             border-radius: 30px;
             margin: 10px 0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+       }
 
-        .copy-btn {
+       .copy-btn {
             background: var(--vodafone-red);
             color: white;
             border: none;
@@ -349,26 +519,26 @@
             display: block;
             width: fit-content;
             margin: 0 auto;
-        }
+       }
 
-        .copy-btn:hover {
+       .copy-btn:hover {
             background: #c10000;
             transform: translateY(-2px);
-        }
+       }
 
-        .payment-steps {
+       .payment-steps {
             margin: 20px 0;
             padding-right: 20px;
-        }
+       }
 
-        .payment-step {
+       .payment-step {
             display: flex;
             align-items: flex-start;
             margin-bottom: 15px;
             position: relative;
-        }
+       }
 
-        .step-number {
+       .step-number {
             background: var(--highlight-color);
             color: white;
             width: 25px;
@@ -379,33 +549,33 @@
             justify-content: center;
             margin-left: 10px;
             flex-shrink: 0;
-        }
+       }
 
-        .step-content {
+       .step-content {
             flex-grow: 1;
-        }
+       }
 
-        .payment-form {
+       .payment-form {
             display: flex;
             flex-direction: column;
             gap: 15px;
-        }
+       }
 
-        .form-group {
+       .form-group {
             display: flex;
             flex-direction: column;
             gap: 5px;
-        }
+       }
 
-        .form-group label {
+       .form-group label {
             font-weight: bold;
             color: var(--text-color);
             font-size: 14px;
-        }
+       }
 
-        .form-group input, 
-        .form-group select, 
-        .form-group textarea {
+       .form-group input, 
+       .form-group select, 
+       .form-group textarea {
             padding: 12px;
             border-radius: 8px;
             border: 1px solid #ddd;
@@ -414,31 +584,31 @@
             font-size: 16px;
             width: 100%;
             box-sizing: border-box;
-        }
+       }
 
-        .form-group input:focus, 
-        .form-group select:focus, 
-        .form-group textarea:focus {
+       .form-group input:focus, 
+       .form-group select:focus, 
+       .form-group textarea:focus {
             outline: none;
             border-color: var(--highlight-color);
             box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
-        }
+       }
 
-        .error-message {
+       .error-message {
             color: var(--error-color);
             font-size: 12px;
             margin-top: 3px;
             display: none;
-        }
+       }
 
-        .file-upload {
+       .file-upload {
             position: relative;
             overflow: hidden;
             display: inline-block;
             width: 100%;
-        }
+       }
 
-        .file-upload-btn {
+       .file-upload-btn {
             border: 2px dashed #ddd;
             border-radius: 8px;
             padding: 20px;
@@ -446,31 +616,57 @@
             cursor: pointer;
             transition: all 0.3s;
             width: 100%;
-        }
+       }
 
-        .file-upload-btn:hover {
-            border-color: var(--highlight-color);
-            background-color: rgba(33, 150, 243, 0.05);
-        }
+       ./* استبدل أو أضف هذه الأنماط */
+.file-upload-btn {
+    border: 2px dashed var(--highlight-color);
+    background-color: rgba(33, 150, 243, 0.05);
+    padding: 30px; /* زيادة المساحة الداخلية */
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    min-height: 150px; /* ارتفاع ثابت */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
-        .file-upload-input {
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-        }
+.file-upload-btn span {
+    margin-top: 10px;
+}
 
-        .file-name {
-            margin-top: 10px;
-            font-size: 14px;
-            color: var(--text-color);
-            text-align: center;
-        }
+.file-upload-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
 
-        .submit-btn {
+.file-name {
+    margin-top: 15px;
+    font-size: 14px;
+    color: var(--text-color);
+    text-align: center;
+    word-break: break-all; /* لمنع تجاوز النص للمساحة */
+}
+
+/* عرض الصورة المختارة بحجم ثابت */
+#fileName img {
+    max-width: 100%;
+    max-height: 200px;
+    display: block;
+    margin: 10px auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    object-fit: contain; /* للحفاظ على نسبة العرض إلى الارتفاع */
+}
+
+       .submit-btn {
             background-color: var(--telegram-color);
             color: white;
             border: none;
@@ -486,18 +682,18 @@
             margin-top: 20px;
             transition: background-color 0.3s;
             width: 100%;
-        }
+       }
 
-        .submit-btn:hover {
+       .submit-btn:hover {
             background-color: var(--button-hover);
-        }
+       }
 
-        .submit-btn:disabled {
+       .submit-btn:disabled {
             background-color: #cccccc;
             cursor: not-allowed;
-        }
+       }
 
-        .close-payment {
+       .close-payment {
             position: absolute;
             top: 15px;
             right: 15px;
@@ -507,9 +703,9 @@
             border: none;
             color: var(--text-color);
             z-index: 1001;
-        }
+       }
 
-        .confirmation-screen {
+       .confirmation-screen {
             position: fixed;
             top: 0;
             left: 0;
@@ -524,28 +720,28 @@
             padding: 20px;
             box-sizing: border-box;
             text-align: center;
-        }
+       }
 
-        .confirmation-icon {
+       .confirmation-icon {
             font-size: 60px;
             color: var(--success-color);
             margin-bottom: 20px;
-        }
+       }
 
-        .confirmation-screen h2 {
+       .confirmation-screen h2 {
             color: var(--success-color);
             margin-bottom: 15px;
             font-size: 24px;
-        }
+       }
 
-        .confirmation-screen p {
+       .confirmation-screen p {
             color: var(--text-color);
             margin-bottom: 30px;
             font-size: 16px;
             max-width: 300px;
-        }
+       }
 
-        .clan-screen {
+       .clan-screen {
             position: fixed;
             top: 0;
             left: 0;
@@ -560,9 +756,9 @@
             padding: 20px;
             box-sizing: border-box;
             overflow-y: auto;
-        }
+       }
 
-        .clan-card {
+       .clan-card {
             background-color: var(--card-bg);
             border-radius: 15px;
             padding: 20px;
@@ -570,33 +766,33 @@
             max-width: 500px;
             box-shadow: 0 6px 15px rgba(0,0,0,0.1);
             margin-top: 20px;
-        }
+       }
 
-        .clan-title {
+       .clan-title {
             font-size: 22px;
             margin-bottom: 20px;
             color: var(--text-color);
             border-bottom: 2px solid var(--highlight-color);
             padding-bottom: 10px;
             text-align: center;
-        }
+       }
 
-        .clan-image {
+       .clan-image {
             width: 100%;
             max-height: 200px;
             object-fit: cover;
             border-radius: 10px;
             margin-bottom: 20px;
             border: 2px solid var(--highlight-color);
-        }
+       }
 
-        .clan-form {
+       .clan-form {
             display: flex;
             flex-direction: column;
             gap: 15px;
-        }
+       }
 
-        .support-screen {
+       .support-screen {
             position: fixed;
             top: 0;
             left: 0;
@@ -610,44 +806,44 @@
             z-index: 1000;
             padding: 20px;
             box-sizing: border-box;
-        }
+       }
 
-        .support-card {
+       .support-card {
             background-color: var(--card-bg);
             border-radius: 15px;
             padding: 20px;
             width: 90%;
             max-width: 500px;
             box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-        }
+       }
 
-        .support-title {
+       .support-title {
             font-size: 22px;
             margin-bottom: 20px;
             color: var(--text-color);
             border-bottom: 2px solid var(--highlight-color);
             padding-bottom: 10px;
             text-align: center;
-        }
+       }
 
-        .support-item {
+       .support-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 12px 0;
             border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
+       }
 
-        .support-name {
+       .support-name {
             font-weight: bold;
-        }
+       }
 
-        .support-number {
+       .support-number {
             direction: ltr;
             display: inline-block;
-        }
+       }
 
-        .whatsapp-btn {
+       .whatsapp-btn {
             background-color: var(--whatsapp-green);
             color: white;
             border: none;
@@ -659,18 +855,18 @@
             align-items: center;
             gap: 5px;
             transition: all 0.3s;
-        }
+       }
 
-        .whatsapp-btn:hover {
+       .whatsapp-btn:hover {
             background-color: #128C7E;
-        }
+       }
 
-        .whatsapp-icon {
+       .whatsapp-icon {
             width: 16px;
             height: 16px;
-        }
+       }
 
-        .close-support {
+       .close-support {
             position: absolute;
             top: 15px;
             right: 15px;
@@ -679,9 +875,9 @@
             background: none;
             border: none;
             color: var(--text-color);
-        }
+       }
 
-        .close-clan {
+       .close-clan {
             position: absolute;
             top: 15px;
             right: 15px;
@@ -690,19 +886,20 @@
             background: none;
             border: none;
             color: var(--text-color);
-        }
+       }
 
-        @media (max-width: 480px) {
-            .payment-card {
-                padding: 15px;
-            }
+       @media (max-width: 480px) {
+       .payment-card {
+            padding: 15px;
+      
+       }
             
-            .form-group input, 
-            .form-group select, 
-            .form-group textarea {
-                padding: 10px;
-                font-size: 14px;
-            }
+       .form-group input, 
+       .form-group select, 
+       .form-group textarea {
+           padding: 10px;
+           font-size: 14px;
+       }
             
             .payment-title {
                 font-size: 20px;
@@ -720,15 +917,9 @@
             .controls {
                 gap: 5px;
             }
-            
-            .clan-button,
-            .support-button {
-                padding: 8px 10px;
-                font-size: 12px;
-            }
         }
 
-        @media (min-width: 768px) {
+       @media (min-width: 768px) {
             .container {
                 max-width: 700px;
             }
@@ -752,9 +943,9 @@
             .logo-text {
                 font-size: 20px;
             }
-        }
+       }
 
-        .copy-notification {
+       .copy-notification {
            position: fixed;
            bottom: 20px;
            left: 50%;
@@ -770,93 +961,29 @@
        }
     
        .copy-notification.show {
-          opacity: 1;
+           opacity: 1;
        }
        
-
-       .control-button {
-          border: none;
-          padding: 8px 16px;
-          border-radius: 0; 
-          cursor: pointer;
-          font-size: 13px;
-          font-weight: bold;
-          transition: all 0.3s;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 6px;
-          white-space: nowrap;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-          position: relative;
-          overflow: hidden;
-          height: 36px;
-          min-width: 100px;
+       body {
+           user-select: none;
+           -webkit-user-select: none;
+           -moz-user-select: none;
+           -ms-user-select: none;
        }
 
-       .control-button::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-          transition: 0.5s;
-       }
-
-       .control-button:hover::before {
-          left: 100%;
-       }
-
-       .control-button:active {
-          transform: scale(0.98);
-       }
-
-       .support-button {
-          background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
-          color: white;
-       }
-
-       .clan-button {
-          background: linear-gradient(135deg, #2196F3 0%, #0D47A1 100%);
-          color: white;
-       }
-
-       .control-button svg {
-          width: 16px;
-          height: 16px;
-          flex-shrink: 0;
-       }
-
-      .dark-mode .support-button {
-          background: linear-gradient(135deg, #388E3C 0%, #1B5E20 100%);
-      }
-
-      .dark-mode .clan-button {
-          background: linear-gradient(135deg, #1976D2 0%, #0D47A1 100%);
-      }
-
-      body {
-          user-select: none;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
-      }
-
-      input, textarea, [contenteditable] {
+       input, textarea, [contenteditable] {
           user-select: text;
           -webkit-user-select: text;
           -moz-user-select: text;
           -ms-user-select: text;
-      }
+       }
     
 
-      .card {
+       .card {
           -webkit-tap-highlight-color: transparent; 
           tap-highlight-color: transparent; 
           user-select: none; 
-      }
+       }
 
       .card:active {
           background-color: inherit !important; 
@@ -867,51 +994,1379 @@
       }
 
       button, .btn {
-          -webkit-tap-highlight-color: transparent;
+         -webkit-tap-highlight-color: transparent;
           tap-highlight-color: transparent;
-     }
+      }
     
-     .clan-button, 
-     .support-button {
-         border-radius: 12px; /* زوايا مدورة بشكل معتدل */
-         padding: 4px 12px; /* حافظ على الحجم الأصلي مع تعديل بسيط */
-         
-    }
+      .card:active, 
+          button:active, 
+          .buy-button:active {
+          transform: none !important;
+          animation: none !important;
+      }
 
-    .clan-button:hover, 
-    .support-button:hover {
-       transform: translateY(-2px);
-       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-
-    .clan-button, 
-    .support-button {
-       border-radius: 10px; /* يمكنك زيادة هذه القيمة لمزيد من الانحناء */
-    } 
-    
-    .card:active, 
-    button:active, 
-    .buy-button:active {
-        transform: none !important;
-        animation: none !important;
-    }
-
-   .card:active, 
-   button:active {
-       transform: scale(0.97);
-       transition: transform 0.1s;
-   }
+      .card:active, 
+         button:active {
+         transform: scale(0.97);
+         transition: transform 0.1s;
+      }
    
-   .card:active, 
-      button:active {
-      transform: scale(0.95);
-      transition: transform 0.05s;
-   }
+      .card:active,        
+         button:active {
+         transform: scale(0.95);
+         transition: transform 0.05s;
+      }
+      
+      /* أضف هذه الأنماط إلى قسم الـ style */
 
-   .card, button {
-      user-select: none;
-       -webkit-user-select: none;
-   }
+/* تأثيرات للبطاقات عند الضغط */
+.card:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+}
+
+/* تحسين أزرار الشراء */
+.buy-button {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.buy-button::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%, -50%);
+    transform-origin: 50% 50%;
+}
+
+.buy-button:active::after {
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(20, 20);
+        opacity: 0;
+    }
+}
+
+/* تأثيرات للقوائم */
+.menu-item {
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.menu-item:hover {
+    transform: translateX(-5px);
+    background-color: rgba(33, 150, 243, 0.15);
+}
+
+      .card, button {
+         user-select: none;
+         -webkit-user-select: none;
+      }
+    
+      button, .btn, .card, .menu-item {
+         -webkit-tap-highlight-color: transparent !important;
+         tap-highlight-color: transparent !important;
+      }
+
+      .dark-mode button, 
+      .dark-mode .btn, 
+      .dark-mode .card, 
+      .dark-mode .menu-item {
+          -webkit-tap-highlight-color: transparent !important;
+          tap-highlight-color: transparent !important;
+      }
+
+      .buy-button:hover,
+      .menu-item:hover,
+      .support-button:hover,
+      .clan-button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      }
+ 
+      .buy-button:active,
+      .menu-item:active,
+      .support-button:active,
+      .clan-button:active {
+           transform: scale(0.98);
+           transition: transform 0.05s;
+      }
+   
+      #submitBtn {
+          position: relative;
+          overflow: hidden;
+          transition: all 0.3s ease;
+      }
+
+      #submitBtn .loading-spinner {
+          display: none;
+          width: 20px;
+          height: 20px;
+          border: 3px solid rgba(255,255,255,0.3);
+          border-radius: 50%;
+          border-top-color: white;
+          animation: spin 1s ease-in-out infinite;
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+      }
+
+      @keyframes spin {
+          to { transform: translateY(-50%) rotate(360deg); }
+      }
+
+      .form-disabled {
+          pointer-events: none;
+          opacity: 0.8;
+      }
+
+      .contests-screen {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: var(--bg-color);
+          display: none;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+          padding: 20px;
+          box-sizing: border-box;
+      }
+
+      .contests-card {
+          background-color: var(--card-bg);
+          border-radius: 15px;
+          padding: 30px;
+          width: 90%;
+          max-width: 500px;
+          box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+          text-align: center;
+          border: 1px solid rgba(33, 150, 243, 0.3);
+      }
+    
+      .contests-title {
+          font-size: 24px;
+          margin-bottom: 20px;
+          color: var(--highlight-color);
+          border-bottom: 2px solid var(--highlight-color);
+          padding-bottom: 10px;
+      }
+
+      .contests-content p {
+          font-size: 18px;
+          color: var(--text-color);
+          margin: 15px 0;
+      }
+
+      .confirmation-icon.success {
+          color: #4CAF50;
+      }
+
+      .confirmation-icon.error {
+          color: #f44336;
+      } 
+      
+      .close-contests {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          font-size: 24px;
+          cursor: pointer;
+          background: none;
+          border: none;
+          color: var(--text-color);
+      } 
+
+      .error-screen {
+          display: none;
+      }
+
+      .error-screen .confirmation-icon {
+          color: var(--error-color);
+          font-size: 60px;
+          margin-bottom: 20px;
+      }
+
+      .error-screen h2 {
+          color: var(--error-color);
+      } 
+
+      .payment-screen,
+      .clan-screen,
+      .support-screen,
+      .contests-screen {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background-color: var(--bg-color);
+           z-index: 1000;
+           overflow-y: auto;
+           padding: 20px;
+           box-sizing: border-box;
+           display: none;
+           flex-direction: column;
+      }
+
+      body.modal-open {
+          overflow: hidden;
+          position: fixed;
+          width: 100%;
+          height: 100%;
+      }
+
+      .container {
+          max-width: 100%;
+          margin: 0 auto;
+          padding: 15px;
+          position: relative;
+          z-index: 1;
+      }
+
+      .cards {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+          gap: 15px;
+          position: relative;
+          z-index: 1;
+      }
+
+      @media (min-width: 768px) {
+          .container {
+          max-width: 700px;
+      }
+    
+      .cards {
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+    } 
+
+      @media (max-width: 480px) {
+      .payment-screen,
+      .clan-screen,
+      .support-screen,
+      .contests-screen {
+          padding: 10px;
+    
+      }
+
+      #confirmationMessage {
+          text-align: center;
+          line-height: 1.6;
+         margin: 15px 0;
+      }
+    
+      .order-number {
+          color: var(--highlight-color);
+          font-weight: bold;
+          font-size: 1.2em;
+      }
+
+      .payment-screen,
+      .confirmation-screen,
+      .support-screen,
+      .clan-screen,
+      .contests-screen {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          overflow-y: auto;
+          overscroll-behavior: contain; 
+          touch-action: pan-y; 
+         -webkit-overflow-scrolling: touch;
+      }
+      
+      /* تأثير الموجات على الأزرار */
+.btn-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-effect:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform .5s, opacity 1s;
+}
+
+.btn-effect:active:after {
+    transform: scale(0, 0);
+    opacity: .3;
+    transition: 0s;
+}
+
+/* ظهور شاشة الدفع بسلاسة */
+.payment-screen {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* تأثير اهتزاز عند الخطأ */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+.error-message {
+    animation: shake 0.5s;
+}
+
+/* تأثير موجات عند الضغط */
+.buy-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.buy-button:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%, -50%);
+    transform-origin: 50% 50%;
+}
+
+.buy-button:active:after {
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(20, 20);
+        opacity: 0;
+    }
+}
+.card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(33, 150, 243, 0.2);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    border-color: var(--highlight-color);
+}
+
+.card:active {
+    transform: scale(0.98) !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+}
+
+/* إزالة أي أنماط تسبب الاختفاء */
+.card:active:after,
+.card:active:before {
+    display: none !important;
+} 
+
+/* أضف للـ CSS */
+.card.featured {
+    position: relative;
+    overflow: hidden;
+}
+
+.card.featured::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255,255,255,0) 45%,
+        rgba(255,255,255,0.8) 50%,
+        rgba(255,255,255,0) 55%
+    );
+    animation: shine 3s infinite;
+    opacity: 0.7;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(30deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
+}
+
+/* أضف هذا في قسم الـ CSS */
+.card.featured {
+    position: relative;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--card-bg), var(--card-bg)), 
+                linear-gradient(to right, #FFD700, #D4AF37, #FFD700);
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    overflow: hidden;
+}
+
+.card.featured::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 215, 0, 0) 45%,
+        rgba(255, 215, 0, 0.5) 50%,
+        rgba(255, 215, 0, 0) 55%
+    );
+    animation: shine 3s infinite;
+    opacity: 0.7;
+}
+
+.card.featured::after {
+    content: 'VIP';
+    position: absolute;
+    top: 80px;
+    left: 58px;
+    background: linear-gradient(to right, #D4AF37, #FFD700);
+    color: #000;
+    font-weight: bold;
+    padding: 3px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(30deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
+}
+
+.card.featured .price {
+    color: #D4AF37;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.card.featured .buy-button {
+    background: linear-gradient(to right, #D4AF37, #FFD700);
+    color: #000;
+    font-weight: bold;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.card.featured .buy-button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255,255,255,0.2);
+    transform: rotate(30deg);
+    animation: buttonShine 4s infinite;
+}
+
+@keyframes buttonShine {
+    0% { transform: translateX(-100%) rotate(30deg); }
+    100% { transform: translateX(100%) rotate(30deg); }
+}
+
+/* خلفية متحركة للأزرار */
+.buy-button {
+    background: linear-gradient(90deg, #6a11cb, #2575fc, #6a11cb);
+    background-size: 200% auto;
+    transition: 0.5s;
+}
+
+.buy-button:hover {
+    background-position: right center;
+}
+/* تطبيق التأثير على الأزرار */
+.buy-button, .submit-btn, .whatsapp-btn, .copy-btn {
+    @extend .btn-effect;
+}
+
+/* تأكد من أن هذه الأنماط موجودة */
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transform: scale(1);
+}
+
+.card:active {
+    transform: scale(0.98);
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+}
+
+/* أضف للـ CSS */
+.skeleton-loading {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(90deg, var(--card-bg) 25%, rgba(255,255,255,0.1) 50%, var(--card-bg) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.skeleton {
+    background-color: var(--card-bg);
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.skeleton.title {
+    width: 60%;
+    height: 20px;
+}
+
+.skeleton.price {
+    width: 40%;
+    height: 25px;
+}
+
+.skeleton.button {
+    width: 100%;
+    height: 35px;
+    margin-top: auto;
+}
+
+/* أضف هذه الأنماط في أعلى قسم الـ CSS */
+.card {
+    touch-action: pan-y; /* يسمح بالتمرير العمودي فقط */
+    transform: none !important;
+    transition: none !important;
+    will-change: transform;
+    backface-visibility: visible;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.cards {
+    overflow: visible !important;
+    touch-action: pan-y;
+}
+
+/* أضف للـ CSS */
+.badge {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    background-color: var(--vodafone-red);
+    color: white;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* تأثير ذهبي متحرك */
+.card.featured .buy-button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255,255,255,0.2);
+    transform: rotate(30deg);
+    animation: buttonShine 3s infinite;
+    z-index: 1;
+}
+
+@keyframes buttonShine {
+    0% { transform: translateX(-100%) rotate(30deg); }
+    100% { transform: translateX(100%) rotate(30deg); }
+}
+
+/* تأثير حدود ذهبية */
+.card.featured .buy-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent;
+    border-image: linear-gradient(to right, #D4AF37, #FFD700) 1;
+    animation: borderPulse 2s infinite;
+    z-index: 0;
+}
+
+@keyframes borderPulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
+
+/* تحسينات إضافية للوضع الليلي */
+.dark-mode .card {
+    border: 1px solid rgba(66, 165, 245, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .payment-card,
+.dark-mode .clan-card,
+.dark-mode .support-card {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.dark-mode .file-upload-btn {
+    border-color: rgba(66, 165, 245, 0.5);
+    background-color: rgba(66, 165, 245, 0.05);
+}
+
+.dark-mode .file-upload-btn:hover {
+    background-color: rgba(66, 165, 245, 0.1);
+}
+
+/* تأثير ظهور البطاقات بشكل متتالي */
+.cards {
+    perspective: 1000px;
+}
+
+.card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: cardAppear 0.5s forwards;
+}
+
+@keyframes cardAppear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* أضف هذا لتأثير الجواهر */
+.card.featured .gem-icon {
+    position: relative;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+.card.featured .gem-icon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, 
+        rgba(255,215,0,0.8) 0%, 
+        transparent 70%);
+    animation: pulse 2s infinite alternate;
+    border-radius: 50%;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.8); opacity: 0.5; }
+    100% { transform: scale(1.2); opacity: 0.8; }
+}
+
+/* أضف هذا للوضع الليلي */
+.dark-mode .card.featured {
+    background: linear-gradient(var(--card-bg), var(--card-bg)), 
+                linear-gradient(to right, #D4AF37, #FFD700, #D4AF37);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5);
+}
+
+.dark-mode .card.featured .price {
+    color: #FFD700;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.dark-mode .card.featured .buy-button {
+    background: linear-gradient(to right, #8B7500, #FFD700);
+    color: #111;
+}
+
+/* تأخير ظهور البطاقات بشكل متتالي */
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+.card:nth-child(5) { animation-delay: 0.5s; }
+.card:nth-child(6) { animation-delay: 0.6s; }
+.card:nth-child(7) { animation-delay: 0.7s; }
+.card:nth-child(8) { animation-delay: 0.8s; }
+.card:nth-child(9) { animation-delay: 0.9s; }
+.card:nth-child(10) { animation-delay: 1s; }
+
+/* أنماط اللوجو المتحرك */
+.logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 2px solid var(--highlight-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://i.postimg.cc/fRjpkyTb/IMG.jpg');
+    background-size: cover;
+    background-position: center;
+    animation: logoFloat 6s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(2deg); }
+}
+
+/* إصلاح تخصصي للصورة في البطاقات المميزة */
+.card.featured .file-upload-btn,
+.card.featured .file-name,
+.card.featured #fileName img {
+    all: initial; /* إعادة ضبط كل الأنماط */
+    display: block !important;
+    max-width: 100% !important;
+    height: auto !important;
+    font-family: 'Tajawal', sans-serif !important;
+    color: var(--text-color) !important;
+}
+
+/* إعادة تعيين أنماط رفع الملف للبطاقات المميزة */
+.card.featured .form-group {
+    transform: none !important;
+    animation: none !important;
+}
+
+.card.featured .file-upload {
+    position: relative;
+    overflow: visible;
+    background: none;
+}
+
+.card.featured .file-upload-btn {
+    border: 2px dashed var(--highlight-color) !important;
+    background: rgba(33, 150, 243, 0.05) !important;
+    padding: 20px !important;
+    margin: 10px 0 !important;
+}
+
+.card.featured #fileName img {
+    max-height: 150px !important;
+    width: auto !important;
+    display: block !important;
+    margin: 10px auto !important;
+    border: 1px solid #ddd !important;
+    border-radius: 5px !important;
+}
+
+.vodafone-cash-box {
+    border: 2px solid var(--vodafone-red) !important;
+    animation: none !important; /* إيقاف أي تأثيرات متحركة */
+    transform: none !important; /* إزالة أي تحويلات */
+    box-shadow: none !important; /* إزالة أي ظلال متحركة */
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 10px;
+    background: rgba(228, 0, 0, 0.05);
+    position: static !important; /* تأكيد ثبات الموضع */
+}
+
+/* إذا كنت تريد تأثيرًا بسيطًا بدون تغيير الحجم */
+.vodafone-cash-box:hover {
+    background: rgba(228, 0, 0, 0.1);
+    transition: background 0.3s ease;
+}
+
+.vodafone-cash-box {
+    border: 2px solid var(--vodafone-red);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px 0;
+    background: rgba(228, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+    animation: gentlePulse 4s infinite;
+}
+
+@keyframes gentlePulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(228, 0, 0, 0.1); }
+    50% { box-shadow: 0 0 0 10px rgba(228, 0, 0, 0); }
+} 
+
+.vodafone-cash-box {
+    position: relative;
+    overflow: hidden;
+}
+
+.vodafone-cash-box::before {
+    content: 'Vodafone';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 80px;
+    font-weight: bold;
+    color: rgba(212, 175, 55, 0.1);
+    z-index: 0;
+    pointer-events: none;
+} 
+
+/* إصلاح سلوك البطاقات الأساسي */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    overflow: visible !important; /* تأكيد إظهار كل المحتوى */
+    touch-action: pan-y; /* تمكين التمرير العمودي فقط */
+    will-change: transform; /* تحسين الأداء */
+}
+
+.card {
+    touch-action: manipulation; /* تحسين التفاعل على الشاشات التي تعمل باللمس */
+    transform: none !important;
+    transition: none !important;
+    will-change: transform;
+    backface-visibility: visible;
+}
+
+.card.featured {
+    isolation: isolate; 
+} 
+
+.card {
+    user-select: none;
+    -webkit-user-drag: none; 
+    transform: none !important;
+    transition: transform 0.2s ease;
+}
+
+@media (max-width: 768px) {
+    .cards {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        overflow-x: hidden;
+    }
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  flex-direction: column;
+}
+
+.loader-container {
+  text-align: center;
+}
+
+.modern-loader {
+  width: 80px;
+  height: 80px;
+  border: 6px solid rgba(106, 17, 203, 0.2);
+  border-radius: 50%;
+  border-top-color: #6a11cb;
+  animation: spin 1.2s linear infinite;
+  position: relative;
+}
+
+.modern-loader::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  border: 6px solid transparent;
+  border-radius: 50%;
+  border-top-color: #2575fc;
+  animation: spin 1.6s linear infinite;
+}
+
+.modern-loader::after {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  right: -12px;
+  bottom: -12px;
+  border: 6px solid transparent;
+  border-radius: 50%;
+  border-top-color: #ff4d4d;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #333;
+  font-weight: bold;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+body.loading {
+  overflow: hidden;
+}
+
+body.loading::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  z-index: 9998;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+}
+
+.loading-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modern-loader {
+  width: 80px;
+  height: 80px;
+  border: 6px solid rgba(106, 17, 203, 0.2);
+  border-radius: 50%;
+  border-top-color: #6a11cb;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* أنماط شاشة التحميل */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.loading-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loader-container {
+    text-align: center;
+    color: white;
+}
+
+.modern-loader {
+    width: 80px;
+    height: 80px;
+    border: 6px solid rgba(33, 150, 243, 0.2);
+    border-radius: 50%;
+    border-top-color: var(--highlight-color);
+    animation: spin 1.2s linear infinite;
+    position: relative;
+    margin: 0 auto 20px;
+}
+
+.modern-loader::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
+    border: 6px solid transparent;
+    border-radius: 50%;
+    border-top-color: rgba(33, 150, 243, 0.5);
+    animation: spin 1.6s linear infinite;
+}
+
+.modern-loader::after {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    right: -12px;
+    bottom: -12px;
+    border: 6px solid transparent;
+    border-radius: 50%;
+    border-top-color: rgba(33, 150, 243, 0.3);
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-text {
+    margin-top: 20px;
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+.dark-mode .loading-overlay {
+    background: rgba(0, 0, 0, 0.85);
+}
+
+.dark-mode .modern-loader {
+    border-top-color: var(--button-bg);
+}
+
+.game-banner {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block; /* تأكد من ظهوره */
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    opacity: 1 !important; /* تأكد من الظهور */
+    visibility: visible !important;
+} 
+
+.dark-mode .modern-loader::before {
+    border-top-color: rgba(66, 165, 245, 0.5);
+}
+
+/* تأكد من وجود هذه الأنماط */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none; /* يمنع التفاعل أثناء التحميل */
+}
+
+.loading-overlay.active {
+    opacity: 1;
+}
+
+// أضف هذه الخاصية لصورة الخلفية
+.parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+}
+
+// HTML مثال
+// أضف هذه الخاصية لصورة الخلفية
+.parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    color: white;
+    font-family: 'Tajawal', sans-serif;
+}
+
+.loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+} 
+
+.modern-loader {
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(33, 150, 243, 0.2);
+    border-radius: 50%;
+    border-top-color: var(--highlight-color);
+    animation: spin 1s linear infinite;
+}
+
+.loading-text {
+    margin-top: 20px;
+    color: var(--text-color);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* يزيل التأثير الزرقاء عند النقر على جميع العناصر */
+* {
+    -webkit-tap-highlight-color: transparent;
+    -moz-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+    outline: none !important;
+}
+
+/* حل إضافي لعناصر محددة إن لزم الأمر */
+button, a, .card, .game-option, .menu-item {
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.dark-mode .modern-loader::after {
+    border-top-color: rgba(66, 165, 245, 0.3);
+}
+
+.game-banner {
+    position: relative;
+}
+
+.game-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+    border-radius: 12px;
+} 
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.loading-overlay.active {
+    opacity: 1;
+}
+
+.modern-loader {
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    border-top-color: #2196F3;
+    animation: spin 1s linear infinite;
+}
+
+.loading-text {
+    margin-top: 20px;
+    color: white;
+    font-size: 18px;
+    font-family: 'Tajawal', sans-serif;
+}
+
+.buy-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.card.featured {
+    position: relative;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--card-bg), var(--card-bg)), 
+                linear-gradient(to right, #FFD700, #D4AF37, #FFD700);
+    background-clip: padding-box, border-box;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+ 
+
+.buy-button:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%, -50%);
+}
+.buy-button:active:after {
+    animation: ripple 0.6s ease-out;
+}
+@keyframes ripple {
+    0% { transform: scale(0, 0); opacity: 1; }
+    100% { transform: scale(20, 20); opacity: 0; }
+} 
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* للوضع الليلي */
+.dark-mode .loading-overlay {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.dark-mode .modern-loader {
+    border-top-color: #42A5F5;
+} 
+
+.progressive-load {
+    filter: blur(5px);
+    transition: filter 0.5s;
+}
+
+.progressive-load.loaded {
+    filter: blur(0);
+}
+
+/* صورة placeholder صغيرة الحجم */
+.placeholder-low-quality {
+    width: 100%;
+    height: 180px;
+    background: #f0f0f0;
+} 
 
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -921,113 +2376,91 @@
 <body>
 
     <header>
+    
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="loader-container">
+        <div class="modern-loader"></div>
+        <div class="loading-text">جاري التحميل...</div>
+    </div>
+</div>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        
+        <!-- استبدل قسم اللوجو الحالي بهذا -->
         <div class="logo-container">
-            <div class="logo"></div>
+            <div class="logo">
+            <div class="logo-inner"></div>
+        </div>
             <div class="logo-text"><span class="highlight">شوب بلاي</span></div>
         </div>
+
+
         <div class="controls">
             <button class="dark-mode-toggle" onclick="toggleDarkMode()">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1-8.313-12.454z"/>
                 </svg>
             </button>
-            <button class="support-button" onclick="showSupportScreen()">الدعم الفني</button>
-            <button class="clan-button" onclick="showClanScreen()">انضمام للكلان</button>
+            
+            <div class="menu-container">
+    <button class="menu-button" onclick="toggleMenu()">
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
+    </button>
+    
+    <div class="menu-dropdown">
+        <div class="menu-title">شوب بلاي</div>
+        
+        <div class="menu-item" onclick="showClanScreen()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+            </svg>
+            <span>انضمام للكلان</span>
         </div>
+        
+        <div class="menu-item" onclick="showSupportScreen()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/>
+            </svg>
+            <span>الدعم الفني</span>
+        </div>
+
+        <div class="menu-item" onclick="showContestsScreen()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/>
+            </svg>
+            <span>المسابقات</span>
+        </div>
+       </div>
+    </div>
+
+    <div class="contests-screen" id="contestsScreen">
+    <button class="close-contests" onclick="hideContestsScreen()">✕</button>
+    <div class="contests-card">
+        <h2 class="contests-title">المسابقات</h2>
+        <div class="contests-content">
+            <p>لا يوجد مسابقات حالياً</p>
+            <p>تابعنا لمعرفة المسابقات القادمة</p>
+           </div>
+        </div>
+    </div>
+    
     </header>
 
     <div class="container">
-        <h1 class="main-title">شحن جواهر فري فاير <span>بأسعار مميزة</span></h1>
+        <h1 class="main-title">متجر الألعاب <span>بأسعار مميزة</span></h1>
         
-        <div class="cards">
-            <div class="card" onclick="showPayment('50 جوهرة', '30 جنيه')">
-                <h2>50 جوهرة</h2>
-                <img src="https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png" alt="جوهرة" class="gem-icon">
-                <div class="price">30 جنيه</div>
-                <div class="method">الشحن: عبر الأيدي</div>
-                <button class="buy-button">شراء الآن</button>
-            </div>
-            
-            <div class="card" onclick="showPayment('100 جوهرة', '50 جنيه')">
-                <h2>100 جوهرة</h2>
-                <img src="https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png" alt="جوهرة" class="gem-icon">
-                <div class="price">50 جنيه</div>
-                <div class="method">الشحن: عبر الأيدي</div>
-                <button class="buy-button">شراء الآن</button>
-            </div>
-            
-            <div class="card" onclick="showPayment('210 جوهرة', '110 جنيه')">
-                <h2>210 جوهرة</h2>
-                <img src="https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png" alt="جوهرة" class="gem-icon">
-                <div class="price">100 جنيه</div>
-                <div class="method">الشحن: عبر الأيدي</div>
-                <button class="buy-button">شراء الآن</button>
-            </div>
-            
-            <div class="card" onclick="showPayment('320 جوهرة', '160 جنيه')">
-                <h2>320 جوهرة</h2>
-                <img src="https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png" alt="جوهرة" class="gem-icon">
-                <div class="price">160 جنيه</div>
-                <div class="method">الشحن: عبر الأيدي</div>
-                <button class="buy-button">شراء الآن</button>
-            </div>
-            
-            <div class="card" onclick="showPayment('520 جوهرة', '260 جنيه')">
-                <h2>520 جوهرة</h2>
-                <img src="https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png" alt="جوهرة" class="gem-icon">
-                <div class="price">260 جنيه</div>
-                <div class="method">الشحن: عبر الأيدي</div>
-                <button class="buy-button">شراء الآن</button>
-            </div>
-            
-            <div class="card" onclick="showPayment('1060 جوهرة', '520 جنيه')">
-                <h2>1060 جوهرة</h2>
-                <img src="https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png" alt="جوهرة" class="gem-icon">
-                <div class="price">520 جنيه</div>
-                <div class="method">الشحن: عبر الأيدي</div>
-                <button class="buy-button">شراء الآن</button>
-            </div>
-            
-            <div class="card" onclick="showPayment('1060 جوهرة', '520 جنيه')">
-                <h2>2200 جوهرة</h2>
-                <img src="https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png" alt="جوهرة" class="gem-icon">
-                <div class="price">1050 جنيه</div>
-                <div class="method">الشحن: عبر الأيدي</div>
-                <button class="buy-button">شراء الآن</button>
-            </div>
-            
-            <div class="card" onclick="showPayment('عرض شهري', 'السعر')">
-                <h2>عرض شهري</h2>
-                <img src="https://i.postimg.cc/K87kPGpN/Picsart-25-07-10-13-49-30-174.png" alt="جوهرة" class="gem-icon">
-                <div class="price">؟؟؟ جنيه</div>
-                <div class="method">الشحن: عبر الحساب</div>
-                <button class="buy-button">شراء الآن</button>
-            </div>
-    
-             <div class="card" onclick="showPayment('عرض اسبوعي', 'السعر')">
-                 <h2>عرض اسبوعي</h2>
-                 <img src="https://i.postimg.cc/W4nZvNM3/Picsart-25-07-10-16-32-08-514.png" alt="جوهرة" class="gem-icon">
-                 <div class="price">؟؟؟ جنيه</div>
-                 <div class="method">الشحن: عبر الحساب</div>
-                 <button class="buy-button">شراء الآن</button>
-            </div>
-    
-             <div class="card" onclick="showPayment('بويا باس', '؟؟؟ ')">
-                 <h2>بويا باس</h2>
-                 <img src="https://i.postimg.cc/VkP00rgv/Picsart-25-07-10-16-30-49-185.png" alt="جوهرة" class="gem-icon">
-                 <div class="price">؟؟؟ جنيه</div>
-                 <div class="method">الشحن: عبر الحساب</div>
-                 <button class="buy-button">شراء الآن</button>
-             </div>
-    
-            <div class="card" onclick="showPayment('عرض اسبوعي مخفف', 'السعر')">
-                <h2>عرض اسبوعي مخفف</h2>
-                <img src="https://i.postimg.cc/W4nZvNM3/Picsart-25-07-10-16-32-08-514.png" alt="جوهرة" class="gem-icon">
-               <div class="price">؟؟؟ جنيه</div>
-               <div class="method">الشحن: عبر الحساب</div>
-               <button class="buy-button">شراء الآن</button>
-             </div>
-            
+        <!-- قسم اختيار اللعبة -->
+        <div class="game-selector" id="gameSelector">
+            <!-- سيتم ملؤه بالخيارات عبر الجافاسكريبت -->
+        </div>
+        
+        <!-- صورة بانر اللعبة المختارة -->
+        <img src="" alt="صورة اللعبة" class="game-banner" id="gameBanner">
+        
+        <!-- بطاقات المنتجات حسب اللعبة المختارة -->
+        <div class="cards" id="productsContainer">
+            <!-- سيتم ملؤه بالمنتجات عبر الجافاسكريبت -->
         </div>
     </div>
 
@@ -1040,7 +2473,7 @@
             <div class="vodafone-cash-box">
                 <h3>الدفع عبر فودافون كاش</h3>
                 <p>قم بالتحويل إلى الرقم التالي:</p>
-                <div class="vodafone-number" id="vodafoneNumber">+201070405848</div>
+                <div class="vodafone-number" id="vodafoneNumber">01025404882</div>
                 
                 <p style="margin-top: 10px;">استخدمه لشحن عبر الأيدي</p>
             </div>
@@ -1072,9 +2505,10 @@
             <form class="payment-form" id="paymentForm">
                 <input type="hidden" id="productNameInput">
                 <input type="hidden" id="productPriceInput">
+                <input type="hidden" id="gameNameInput">
                 
                 <div class="form-group">
-                    <label for="playerName">اسم اللاعب في فري فاير:</label>
+                    <label for="playerName">اسم اللاعب في اللعبة:</label>
                     <input type="text" id="playerName" required>
                     <div class="error-message" id="playerNameError">يجب إدخال اسم اللاعب</div>
                 </div>
@@ -1114,18 +2548,25 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
                         <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
                     </svg>
-                    تأكيد الطلب وإرسال البيانات
+                    تأكيد الطلب
                 </button>
             </form>
         </div>
     </div>
 
     <div class="confirmation-screen" id="confirmationScreen">
-        <div class="confirmation-icon">✓</div>
-        <h2>تم تأكيد طلبك بنجاح!</h2>
-        <p>تم إرسال طلبك الي المسؤلين عاده مايستغرق بين نصف ساعه او ساعه</p>
-        <button class="buy-button" onclick="hideConfirmation()" style="width: 200px; margin-top: 20px;">العوده الي المتجر</button>
-    </div>
+    <div class="confirmation-icon success">✓</div>
+    <h2>تم تأكيد طلبك بنجاح!</h2>
+    <p>تم إرسال طلبك إلى المسؤولين</p>
+    <button class="buy-button" onclick="hideConfirmation()">العودة إلى المتجر</button>
+</div>
+
+<div class="confirmation-screen error-screen" id="errorScreen">
+    <div class="confirmation-icon error">✕</div>
+    <h2>فشل إرسال الطلب!</h2>
+    <p id="errorMessage"></p>
+    <button class="buy-button" onclick="hideError()">المحاولة مرة أخرى</button>
+</div>
 
     <!-- شاشة الدعم الفني -->
     <div class="support-screen" id="supportScreen">
@@ -1246,17 +2687,370 @@
         '7811697201',
         '6396743884',
     ];
-    
+
+    // بيانات الألعاب والمنتجات
+    const games = [
+        {
+            id: 'freefire',
+            name: 'فري فاير',
+            banner: 'https://i.postimg.cc/3NpRwLJK/f6b1bf4d93d61cca87cb4be2ae727193.jpg',
+            icon: 'https://i.postimg.cc/fRvVXg7y/IMG.jpg',
+            products: [
+                {
+                    name: '50 جوهرة',
+                    price: '30 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png',
+                    method: 'الشحن: عبر الأيدي'
+                },
+                {
+                    name: '100 جوهرة',
+                    price: '50 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png',
+                    method: 'الشحن: عبر الأيدي'
+                },
+                {
+                    name: '210 جوهرة',
+                    price: '100 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png',
+                    method: 'الشحن: عبر الأيدي'
+                },
+                {
+                    name: '320 جوهرة',
+                    price: '160 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png',
+                    method: 'الشحن: عبر الأيدي'
+                },
+                {
+                    name: '520 جوهرة',
+                    price: '260 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png',
+                    method: 'الشحن: عبر الأيدي'
+                },
+                {
+                    name: '1060 جوهرة',
+                    price: '520 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png',
+                    method: 'الشحن: عبر الأيدي'
+                },
+                {
+                    name: '2200 جوهرة',
+                    price: '1050 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png',
+                    method: 'الشحن: عبر الأيدي'
+                },
+                {
+                    name: 'عرض شهري',
+                    price: '??? جنيه',
+                    image: 'https://i.postimg.cc/K87kPGpN/Picsart-25-07-10-13-49-30-174.png',
+                    method: 'الشحن: عبر الحساب',
+                    featured: true
+                },
+                {
+                    name: 'عرض اسبوعي',
+                    price: '??? جنيه',
+                    image: 'https://i.postimg.cc/W4nZvNM3/Picsart-25-07-10-16-32-08-514.png',
+                    method: 'الشحن: عبر الحساب',
+                    featured: true
+                },
+                {
+                    name: 'بويا باس',
+                    price: '??? جنيه',
+                    image: 'https://i.postimg.cc/VkP00rgv/Picsart-25-07-10-16-30-49-185.png',
+                    method: 'الشحن: عبر الحساب',
+                    featured: true
+                },
+                {
+                    name: 'عرض اسبوعي مخفف',
+                    price: '??? جنيه',
+                    image: 'https://i.postimg.cc/W4nZvNM3/Picsart-25-07-10-16-32-08-514.png',
+                    method: 'الشحن: عبر الحساب',
+                    featured: true
+                }
+            ]
+        },
+        {
+            id: 'pubg',
+            name: 'ببجي موبايل',
+            banner: 'https://i.postimg.cc/SsHRk04T/913282ba48fb727cce0f95f02eeacef1.jpg',
+            icon: 'https://i.postimg.cc/2SYq1fZg/IMG.jpg',
+            products: [
+                {
+                    name: '100 UC',
+                    price: '25 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/pubg-uc.png',
+                    method: 'الشحن: عبر الأيدي'
+                },
+                {
+                    name: '250 UC',
+                    price: '60 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/pubg-uc.png',
+                    method: 'الشحن: عبر الأيدي'
+                },
+                {
+                    name: '500 UC',
+                    price: '120 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/pubg-uc.png',
+                    method: 'الشحن: عبر الأيدي'
+                },
+                {
+                    name: '1000 UC',
+                    price: '240 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/pubg-uc.png',
+                    method: 'الشحن: عبر الأيدي'
+                },
+                {
+                    name: '2500 UC',
+                    price: '600 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/pubg-uc.png',
+                    method: 'الشحن: عبر الأيدي'
+                },
+                {
+                    name: 'باس موسم',
+                    price: '??? جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/pubg-pass.png',
+                    method: 'الشحن: عبر الحساب',
+                    featured: true
+                }
+            ]
+        },
+        {
+            id: 'cod',
+            name: 'كول أوف ديوتي',
+            banner: 'https://i.postimg.cc/k5XByFwc/4522b1878b6c2b3acef534afc1e9cb0f.jpg',
+            icon: 'https://i.postimg.cc/qgVTZ4rr/images.jpg',
+            products: [
+                {
+                    name: '100 CP',
+                    price: '30 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/cod-cp.png',
+                    method: 'الشحن: عبر الأيدي'
+                },
+                {
+                    name: '250 CP',
+                    price: '75 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/cod-cp.png',
+                    method: 'الشحن: عبر الأيدي'
+                },
+                {
+                    name: '500 CP',
+                    price: '150 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/cod-cp.png',
+                    method: 'الشحن: عبر الأيدي'
+                },
+                {
+                    name: '1000 CP',
+                    price: '300 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/cod-cp.png',
+                    method: 'الشحن: عبر الأيدي'
+                },
+                {
+                    name: 'باس موسم',
+                    price: '??? جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/cod-pass.png',
+                    method: 'الشحن: عبر الحساب',
+                    featured: true
+                }
+            ]
+        },
+        {
+            id: 'fortnie',
+            name: 'روبكلس',
+            banner: 'https://i.postimg.cc/9Xqz1fPv/c5c9578fab8ad16a855e4e16871bf359.jpg',
+            icon: 'https://i.postimg.cc/zDLHM7N2/IMG.jpg',
+            products: [
+                {
+                    name: '500 V-Bucks',
+                    price: '40 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-vbucks.png',
+                    method: 'الشحن: عبر الحساب'
+                },
+                {
+                    name: '1000 V-Bucks',
+                    price: '80 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-vbucks.png',
+                    method: 'الشحن: عبر الحساب'
+                },
+                {
+                    name: '2000 V-Bucks',
+                    price: '160 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-vbucks.png',
+                    method: 'الشحن: عبر الحساب'
+                },
+                {
+                    name: 'باس موسم',
+                    price: '??? جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-pass.png',
+                    method: 'الشحن: عبر الحساب',
+                    featured: true
+                }
+            ]
+        },
+        {
+            id: 'fortnite',
+            name: 'بيس',
+            banner: 'https://i.postimg.cc/rmDsBVBR/2509938b0f6b5b83232ac4dd9629d1eb.jpg',
+            icon: 'https://i.postimg.cc/zXKbDfVn/IMG.jpg',
+            products: [
+                {
+                    name: '500 V-Bucks',
+                    price: '40 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-vbucks.png',
+                    method: 'الشحن: عبر الحساب'
+                },
+                {
+                    name: '1000 V-Bucks',
+                    price: '80 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-vbucks.png',
+                    method: 'الشحن: عبر الحساب'
+                },
+                {
+                    name: '2000 V-Bucks',
+                    price: '160 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-vbucks.png',
+                    method: 'الشحن: عبر الحساب'
+                },
+                {
+                    name: 'باس موسم',
+                    price: '??? جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-pass.png',
+                    method: 'الشحن: عبر الحساب',
+                    featured: true
+                }
+            ]
+        },
+    { 
+            id: 'Call of Duty',
+            name: 'دلتا فروس',
+            banner: 'https://i.postimg.cc/3wSWf4cH/e68809ee31fcb80ce44c0274331a2776.jpg',
+            icon: 'https://i.postimg.cc/9Fw0vQ1x/fortnite-icon.jpg',
+            products: [
+                {
+                    name: '500 V-Bucks',
+                    price: '40 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-vbucks.png',
+                    method: 'الشحن: عبر الحساب'
+                },
+                {
+                    name: '1000 V-Bucks',
+                    price: '80 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-vbucks.png',
+                    method: 'الشحن: عبر الحساب'
+                },
+                {
+                    name: '2000 V-Bucks',
+                    price: '160 جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-vbucks.png',
+                    method: 'الشحن: عبر الحساب'
+                },
+                {
+                    name: 'باس موسم',
+                    price: '??? جنيه',
+                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-pass.png',
+                    method: 'الشحن: عبر الحساب',
+                    featured: true
+                }
+            ]
+        }
+    ];
 
     let currentProduct = '';
     let currentPrice = '';
-    
+    let currentGame = '';
+    let orderCounter = localStorage.getItem('orderCounter') || 0;
     
     if (localStorage.getItem('darkMode') === 'true') {
         document.body.classList.add('dark-mode');
     }
     
+    // تهيئة المتجر عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+        initStore();
+    });
 
+    // تهيئة المتجر ببيانات الألعاب
+    function initStore() {
+        const gameSelector = document.getElementById('gameSelector');
+        const productsContainer = document.getElementById('productsContainer');
+        
+        // إضافة خيارات الألعاب
+        games.forEach((game, index) => {
+            const gameOption = document.createElement('div');
+            gameOption.className = 'game-option';
+            if (index === 0) gameOption.classList.add('active');
+            gameOption.setAttribute('data-game', game.id);
+            gameOption.innerHTML = `
+                <img src="${game.icon}" alt="${game.name}" class="game-icon">
+                <span class="game-name">${game.name}</span>
+            `;
+            gameOption.addEventListener('click', () => selectGame(game.id));
+            gameSelector.appendChild(gameOption);
+        });
+        
+        // تحديد اللعبة الأولى افتراضياً
+        selectGame(games[0].id);
+    }
+
+    // اختيار لعبة محددة وتحديث الواجهة
+function selectGame(gameId) {
+    // 1. تحميل البيانات فوراً
+    const game = games.find(g => g.id === gameId);
+    if (!game) return;
+
+    // 2. التحديثات الفورية للواجهة
+    currentGame = game.name;
+    updateActiveButtons(gameId);
+    updateProducts(game.products); // تحديث المنتجات أولاً
+    
+    // 3. تقنية التحميل الذكي للبنر
+    const banner = document.getElementById('gameBanner');
+    if (banner.complete) { // إذا كانت الصورة مخزنة مسبقاً
+        banner.src = game.banner;
+    } else {
+        // تحميل متقدم بدون تأخير مرئي
+        const tempImg = new Image();
+        tempImg.src = game.banner;
+        tempImg.onload = () => {
+            banner.src = game.banner;
+        };
+        banner.src = game.banner; // العرض الفوري مع التحميل في الخلفية
+    }
+}
+
+function updateActiveButtons(gameId) {
+    document.querySelectorAll('.game-option').forEach(option => {
+        option.classList.toggle('active', option.dataset.game === gameId);
+    });
+}
+    // تحديث قائمة المنتجات حسب اللعبة المختارة
+    function updateProducts(products) {
+        const productsContainer = document.getElementById('productsContainer');
+        productsContainer.innerHTML = '';
+        
+        products.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            if (product.featured) card.classList.add('featured');
+            
+            card.innerHTML = `
+                <h2>${product.name}</h2>
+                <img src="${product.image}" alt="${product.name}" class="gem-icon">
+                <div class="price">${product.price}</div>
+                <div class="method">${product.method}</div>
+                <button class="buy-button">شراء الآن</button>
+            `;
+            
+            card.addEventListener('click', () => showPayment(product.name, product.price));
+            productsContainer.appendChild(card);
+        });
+    }
+    
+    function toggleMenu() {
+        const menuButton = document.querySelector('.menu-button');
+        const menuDropdown = document.querySelector('.menu-dropdown');
+        
+        menuButton.classList.toggle('active');
+        menuDropdown.classList.toggle('active');
+    }
     
     function toggleDarkMode() {
         document.body.classList.toggle('dark-mode');
@@ -1264,34 +3058,113 @@
     }
     
     function showPayment(product, price) {
-        console.log("Opening payment for:", product, price);
-        try {
-            currentProduct = product;
-            currentPrice = price;
-            document.getElementById('productNameInput').value = product;
-            document.getElementById('productPriceInput').value = price;
-            document.getElementById('paymentScreen').style.display = 'flex';
-            resetForm();
-        } catch (e) {
-            console.error("Error in showPayment:", e);
-        }
+        currentProduct = product;
+        currentPrice = price;
+        document.getElementById('productNameInput').value = product;
+        document.getElementById('productPriceInput').value = price;
+        document.getElementById('gameNameInput').value = currentGame;
+        document.getElementById('paymentScreen').style.display = 'flex';
+        document.body.classList.add('modal-open');
+        resetForm();
     }
     
     function hidePayment() {
         document.getElementById('paymentScreen').style.display = 'none';
+        document.body.classList.remove('modal-open');
+    }
+    
+    async function selectGame(gameId) {
+    showLoader(); // عرض شاشة التحميل
+    
+    try {
+        const game = games.find(g => g.id === gameId);
+        if (!game) return;
+
+        currentGame = game.name;
+        
+        // تحديث الأزرار النشطة
+        document.querySelectorAll('.game-option').forEach(option => {
+            option.classList.toggle('active', option.dataset.game === gameId);
+        });
+        
+        // تحديث البانر
+        const banner = document.getElementById('gameBanner');
+        await loadImage(banner, game.banner);
+        
+        // تحديث المنتجات
+        updateProducts(game.products);
+        
+    } catch (error) {
+        console.error('Error:', error);
+    } finally {
+        hideLoader(); // إخفاء شاشة التحميل
+    }
+}
+
+// دالة مساعدة لتحميل الصور
+function loadImage(element, url) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => {
+            element.src = url;
+            resolve();
+        };
+        img.onerror = resolve;
+        img.src = url;
+    });
+}
+    
+    // دالة التحميل المعدلة
+    function showLoader(duration = 2000) {
+        return new Promise((resolve) => {
+            const loader = document.getElementById('loadingOverlay');
+            loader.style.display = 'flex';
+            loader.classList.add('active');
+            
+            setTimeout(() => {
+                loader.classList.remove('active');
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    resolve();
+                }, 300);
+            }, duration);
+        });
     }
     
     function showConfirmation() {
         document.getElementById('confirmationScreen').style.display = 'flex';
     }
     
+    function loadBanner(url) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'blob';
+    xhr.onload = function() {
+        const blob = this.response;
+        const img = document.getElementById('gameBanner');
+        img.src = URL.createObjectURL(blob);
+    };
+    xhr.send();
+}
+    
     function hideConfirmation() {
         document.getElementById('confirmationScreen').style.display = 'none';
         hidePayment();
     }
     
+    function showError(message = 'حدث خطأ أثناء إرسال الطلب يرجي التوجه لدعم الفني') {
+        document.getElementById('errorMessage').textContent = message;
+        document.getElementById('errorScreen').style.display = 'flex';
+    }
+    
+    function hideError() {
+        document.getElementById('errorScreen').style.display = 'none';
+    }
+    
     function showSupportScreen() {
         document.getElementById('supportScreen').style.display = 'flex';
+        document.querySelector('.menu-dropdown').classList.remove('active');
+        document.querySelector('.menu-button').classList.remove('active');
     }
     
     function hideSupportScreen() {
@@ -1300,6 +3173,18 @@
     
     function showClanScreen() {
         document.getElementById('clanScreen').style.display = 'flex';
+        document.querySelector('.menu-dropdown').classList.remove('active');
+        document.querySelector('.menu-button').classList.remove('active');
+    }
+    
+    function showContestsScreen() {
+        document.getElementById('contestsScreen').style.display = 'flex';
+        document.querySelector('.menu-dropdown').classList.remove('active');
+        document.querySelector('.menu-button').classList.remove('active');
+    }
+    
+    function hideContestsScreen() {
+        document.getElementById('contestsScreen').style.display = 'none';
     }
     
     function hideClanScreen() {
@@ -1317,7 +3202,7 @@
             }, 3000);
         }).catch(err => {
             console.error('Failed to copy: ', err);
-            alert('حدث خطأ أثناء نسخ الرقم');
+            showError('حدث خطأ أثناء نسخ الرقم');
         });
     }
     
@@ -1343,7 +3228,6 @@
         });
     }
     
-    // التحقق من صحة النموذج قبل الإرسال
     function validateForm() {
         let isValid = true;
         
@@ -1382,7 +3266,6 @@
         return isValid;
     }
 
-    // التحقق من صحة نموذج الكلان
     function validateClanForm() {
         let isValid = true;
         
@@ -1405,38 +3288,34 @@
         return isValid;
     }
     
-    // إعداد أحداث النقر بعد تحميل الصفحة
-    document.addEventListener('DOMContentLoaded', function() {
-        // إعداد أحداث النقر على البطاقات
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', function(e) {
-
-                if (e.target.classList.contains('buy-button')) {
-                    return;
-                }
-                
-                const title = this.querySelector('h2').textContent.trim();
-                const price = this.querySelector('.price').textContent.trim();
-                
-                console.log("Card clicked:", title, price);
-                showPayment(title, price);
-            });
-        });
-        
-        console.log("DOM fully loaded and parsed");
+    document.addEventListener('click', function(e) {
+        const menuContainer = document.querySelector('.menu-container');
+        if (!menuContainer.contains(e.target)) {
+            document.querySelector('.menu-dropdown').classList.remove('active');
+            document.querySelector('.menu-button').classList.remove('active');
+        }
     });
     
-    // إرسال البيانات إلى Telegram
     document.getElementById('paymentForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         
         if (!validateForm()) return;
 
         const submitBtn = document.getElementById('submitBtn');
-        submitBtn.disabled = true;
+        const originalText = submitBtn.innerHTML;
+        
         submitBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0020 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74A7.93 7.93 0 004 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg> جاري الإرسال...';
+        submitBtn.disabled = true;
+
+        // إظهار شاشة التحميل أثناء الإرسال
+        await showLoader();
+
+        orderCounter++;
+        localStorage.setItem('orderCounter', orderCounter);
 
         const orderData = {
+            orderNumber: orderCounter,
+            game: currentGame,
             product: currentProduct,
             price: currentPrice,
             playerName: document.getElementById('playerName').value.trim(),
@@ -1446,8 +3325,9 @@
             screenshot: document.getElementById('screenshot').files[0]
         };
 
-        let message = ` *طلب شحن جواهر جديد* \n\n`;
-        message += ` *يرجي ارسال هذه الرساله الي الجروب الطلبات* \n`;
+        let message = ` *طلب شحن جديد* \n\n`;
+        message += ` *رقم الطلب:* #${orderCounter}\n`;
+        message += ` *اللعبة:* ${orderData.game}\n`;
         message += ` *المنتج:* ${orderData.product}\n`;
         message += ` *السعر:* ${orderData.price}\n\n`;
         message += ` *اسم اللاعب:* ${orderData.playerName}\n`;
@@ -1455,11 +3335,10 @@
         message += ` *رقم الهاتف:* ${orderData.phoneNumber}\n\n`;
         message += ` *طريقة الدفع:* فودافون كاش\n`;
         message += ` *رقم التحويل:* ${orderData.transactionNumber}\n\n`;
-        message += ` *رقم فودافون كاش:* +201070405848\n\n`;
         message += ` *وقت الطلب:* ${new Date().toLocaleString('ar-EG')}`;
 
         try {
-            // إرسال الرسالة النصية لكل المشرفين
+            // 1. إرسال الرسالة النصية لجميع المشرفين
             const textPromises = ADMIN_CHAT_IDS.map(chatId => {
                 return fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
@@ -1473,46 +3352,51 @@
                     })
                 });
             });
+            
+            await Promise.all(textPromises);
 
-            let photoPromises = [];
+            // 2. إرسال الصورة لجميع المشرفين إذا كانت موجودة
             if (orderData.screenshot) {
-                photoPromises = ADMIN_CHAT_IDS.map(chatId => {
+                const photoPromises = ADMIN_CHAT_IDS.map(chatId => {
                     const formData = new FormData();
                     formData.append('chat_id', chatId);
                     formData.append('photo', orderData.screenshot);
-                    formData.append('caption', 'إثبات الدفع للطلب أعلاه');
+                    formData.append('caption', `إثبات الدفع للطلب #${orderCounter}`);
+                    
                     return fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
                         method: 'POST',
                         body: formData
                     });
                 });
-            }
 
-            await Promise.all([...textPromises, ...photoPromises]);
+                await Promise.all(photoPromises);
+            }
+            
+            // عرض رسالة النجاح
             showConfirmation();
+            
         } catch (error) {
             console.error('Error:', error);
-            alert('حدث خطأ أثناء إرسال البيانات، يرجى المحاولة مرة أخرى');
+            showError('حدث خطأ أثناء إرسال الطلب، يرجى المحاولة مرة أخرى أو التواصل مع الدعم الفني');
         } finally {
             submitBtn.disabled = false;
-            submitBtn.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
-                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
-                </svg>
-                تأكيد الطلب وإرسال البيانات
-            `;
+            submitBtn.innerHTML = originalText;
         }
     });
 
-    // إرسال طلب الانضمام للكلان
     document.getElementById('clanForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         
         if (!validateClanForm()) return;
 
         const submitBtn = document.getElementById('clanSubmitBtn');
-        submitBtn.disabled = true;
+        const originalText = submitBtn.innerHTML;
+        
         submitBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0020 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74A7.93 7.93 0 004 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg> جاري الإرسال...';
+        submitBtn.disabled = true;
+
+        // إظهار شاشة التحميل أثناء الإرسال
+        await showLoader();
 
         const clanData = {
             playerName: document.getElementById('clanPlayerName').value.trim(),
@@ -1541,19 +3425,29 @@
                 });
             });
             
-            await Promise.all(promises);
+            const responses = await Promise.all(promises);
+            responses.forEach(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+            });
             
             showConfirmation();
             hideClanScreen();
         } catch (error) {
             console.error('Error:', error);
-            alert('حدث خطأ أثناء إرسال البيانات، يرجى المحاولة مرة أخرى');
+            
+            let errorMsg = 'حدث خطأ أثناء إرسال الطلب يرجي التوجه لدعم الفني';
+            if (error.message.includes('Failed to fetch')) {
+                errorMsg = 'مشكلة في الاتصال بالإنترنت، يرجى التحقق من اتصالك';
+            }
+            
+            showError(errorMsg);
         } finally {
             submitBtn.disabled = false;
-            submitBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg> إرسال طلب الانضمام';
+            submitBtn.innerHTML = originalText;
         }
     });
-    
-    </script>
+</script>
 </body>
 </html>
