@@ -1685,7 +1685,7 @@
 }
 
 .card {
-    opacity: 0;
+    opacity: 1;
     transform: translateY(20px);
     animation: cardAppear 0.5s forwards;
 }
@@ -2142,6 +2142,7 @@ body.loading::after {
     border-top-color: rgba(66, 165, 245, 0.5);
 }
 
+
 /* تأكد من وجود هذه الأنماط */
 .loading-overlay {
     position: fixed;
@@ -2160,8 +2161,18 @@ body.loading::after {
     pointer-events: none; /* يمنع التفاعل أثناء التحميل */
 }
 
-.loading-overlay.active {
-    opacity: 1;
+/* أضف هذا للوضع الداكن الافتراضي */
+body {
+    background-color: #121212;
+    color: #f1f1f1;
+}
+
+/* تأكد من أن هذه المتغيرات للوضع الداكن هي الافتراضية */
+:root {
+    --bg-color: #121212;
+    --text-color: #f1f1f1;
+    --card-bg: #1e1e1e;
+    /* بقية متغيرات الوضع الداكن... */
 }
 
 // أضف هذه الخاصية لصورة الخلفية
@@ -2173,6 +2184,37 @@ body.loading::after {
     height: 100vh;
     position: relative;
 }
+
+/* ستايل الشاشة المميزة */
+.account-confirm {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border: 2px solid #D4AF37;
+}
+
+.premium {
+    color: #D4AF37;
+    font-size: 60px;
+}
+
+.premium-note {
+    color: #D4AF37;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.premium-btn {
+    background: linear-gradient(to right, #D4AF37, #FFD700);
+    color: #000;
+}
+
+.logo-container {
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.logo-container:active {
+    transform: scale(0.95);
+} 
 
 // HTML مثال
 // أضف هذه الخاصية لصورة الخلفية
@@ -2245,6 +2287,135 @@ button, a, .card, .game-option, .menu-item {
     -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
 }
 
+/* شاشة تأكيد الشحن عبر الحساب - الوضع الداكن */
+.account-confirm-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(15px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 20px;
+    box-sizing: border-box;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.account-confirm-card {
+    background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+    border-radius: 20px;
+    border: 1px solid rgba(66, 165, 245, 0.3);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.account-confirm-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(66, 165, 245, 0) 45%,
+        rgba(66, 165, 245, 0.1) 50%,
+        rgba(66, 165, 245, 0) 55%
+    );
+    animation: shine 4s infinite;
+    opacity: 0.6;
+}
+
+.premium-badge {
+    font-size: 60px;
+    color: #D4AF37;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(212, 175, 55, 0.5);
+    animation: pulse 2s infinite;
+}
+
+.account-confirm-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #D4AF37;
+    margin-bottom: 15px;
+}
+
+.account-confirm-text {
+    color: #e0e0e0;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.premium-note {
+    color: #D4AF37;
+    font-weight: 600;
+    font-size: 14px;
+    margin: 20px 0;
+    padding: 10px;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 8px;
+    border-left: 3px solid #D4AF37;
+}
+
+.premium-btn {
+    background: linear-gradient(to right, #D4AF37, #FFD700);
+    color: #000;
+    font-weight: 700;
+    padding: 15px 30px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.premium-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+}
+
+.premium-btn:active {
+    transform: scale(0.98);
+}
+
+/* تأثيرات الحركة */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* للهواتف */
+@media (max-width: 768px) {
+    .account-confirm-card {
+        padding: 25px 20px;
+    }
+    
+    .premium-badge {
+        font-size: 50px;
+    }
+    
+    .account-confirm-title {
+        font-size: 24px;
+    }
+}
+
+
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
@@ -2303,6 +2474,38 @@ button, a, .card, .game-option, .menu-item {
     font-size: 18px;
     font-family: 'Tajawal', sans-serif;
 }
+.coming-soon {
+    text-align: center;
+    margin: 70px auto 40px; /* مسافة من البانر ومن الأسفل */
+    color: var(--highlight-color);
+    font-size: 25px; /* تصغير حجم الخط */
+    font-weight: 600; /* وزن متوسط */
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 65px;
+    padding: 0;
+    background: transparent;
+}
+
+/* تأثير بسيط لو عايزه */
+.coming-soon span:first-child {
+    font-size: 1.3em; /* حجم الأيقونة */
+    opacity: 0.8;
+} 
+
+/* لو عايز تأثير أنيق */
+.coming-soon::before {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 25%;
+    width: 50%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--highlight-color), transparent);
+    opacity: 0.3;
+} 
 
 .buy-button {
     position: relative;
@@ -2377,6 +2580,9 @@ button, a, .card, .game-option, .menu-item {
 
     <header>
     
+    <!-- في قسم <head> -->
+<link rel="preload" href="https://i.postimg.cc/3wSWf4cH/e68809ee31fcb80ce44c0274331a2776.jpg" as="image" id="deltaForceBannerPreload">
+    
 <div class="loading-overlay" id="loadingOverlay">
     <div class="loader-container">
         <div class="modern-loader"></div>
@@ -2385,22 +2591,11 @@ button, a, .card, .game-option, .menu-item {
 </div>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         
-        <!-- استبدل قسم اللوجو الحالي بهذا -->
-        <div class="logo-container">
-            <div class="logo">
-            <div class="logo-inner"></div>
-        </div>
-            <div class="logo-text"><span class="highlight">شوب بلاي</span></div>
-        </div>
-
-
-        <div class="controls">
-            <button class="dark-mode-toggle" onclick="toggleDarkMode()">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1-8.313-12.454z"/>
-                </svg>
-            </button>
-            
+<div class="logo-container" onclick="toggleDarkMode()">
+    <div class="logo" style="background-image: url('https://i.postimg.cc/x19YZsDq/IMG.jpg'); border: none;"></div>
+    <div class="logo-text"><span class="highlight">شوبت بلاي</span></div>
+</div>
+           
             <div class="menu-container">
     <button class="menu-button" onclick="toggleMenu()">
         <div class="menu-line"></div>
@@ -2409,7 +2604,7 @@ button, a, .card, .game-option, .menu-item {
     </button>
     
     <div class="menu-dropdown">
-        <div class="menu-title">شوب بلاي</div>
+        <div class="menu-title">القائمه</div>
         
         <div class="menu-item" onclick="showClanScreen()">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -2554,11 +2749,21 @@ button, a, .card, .game-option, .menu-item {
         </div>
     </div>
 
-    <div class="confirmation-screen" id="confirmationScreen">
+<!-- شاشة التأكيد العادية -->
+<div class="confirmation-screen" id="confirmationScreen">
     <div class="confirmation-icon success">✓</div>
-    <h2>تم تأكيد طلبك بنجاح!</h2>
-    <p>تم إرسال طلبك إلى المسؤولين</p>
+    <h2>تم استلام طلبك بنجاح!</h2>
+    <p>عاده مايستغرق الامر بين دقائق او ساعات حسب الضغط</p>
     <button class="buy-button" onclick="hideConfirmation()">العودة إلى المتجر</button>
+</div>
+
+<!-- شاشة التأكيد المميزة للشحن عبر الحساب -->
+<div class="confirmation-screen account-confirm" id="accountConfirmationScreen">
+    <div class="confirmation-icon premium"></div>
+    <h2>تم استلام طلبك</h2>
+    <p>سيتواصل معك تراسيند مخصص لشحن طلبك</p>
+    <div class="premium-note">(من الساعه 7:00 مساء الي اوقات محدده)</div>
+    <button class="buy-button premium-btn" onclick="hideConfirmation()">العوده للمتجر</button>
 </div>
 
 <div class="confirmation-screen error-screen" id="errorScreen">
@@ -2740,30 +2945,31 @@ button, a, .card, .game-option, .menu-item {
                 },
                 {
                     name: 'عرض شهري',
-                    price: '??? جنيه',
+                    price: '320 جنيه',
                     image: 'https://i.postimg.cc/K87kPGpN/Picsart-25-07-10-13-49-30-174.png',
                     method: 'الشحن: عبر الحساب',
                     featured: true
                 },
+                              {
+                    name: 'عرض شهري',
+                    price: '300 جنيه',
+                    image: 'https://i.postimg.cc/K87kPGpN/Picsart-25-07-10-13-49-30-174.png',
+                    method: 'الشحن: عبر الايدي',
+                    featured: true
+                },
                 {
                     name: 'عرض اسبوعي',
-                    price: '??? جنيه',
+                    price: '90 جنيه',
                     image: 'https://i.postimg.cc/W4nZvNM3/Picsart-25-07-10-16-32-08-514.png',
-                    method: 'الشحن: عبر الحساب',
+                    method: 'الشحن: عبر الايدي',
                     featured: true
                 },
-                {
-                    name: 'بويا باس',
-                    price: '??? جنيه',
-                    image: 'https://i.postimg.cc/VkP00rgv/Picsart-25-07-10-16-30-49-185.png',
-                    method: 'الشحن: عبر الحساب',
-                    featured: true
-                },
+
                 {
                     name: 'عرض اسبوعي مخفف',
-                    price: '??? جنيه',
+                    price: '40 جنيه',
                     image: 'https://i.postimg.cc/W4nZvNM3/Picsart-25-07-10-16-32-08-514.png',
-                    method: 'الشحن: عبر الحساب',
+                    method: 'الشحن: عبر الأيدي',
                     featured: true
                 }
             ]
@@ -2773,183 +2979,35 @@ button, a, .card, .game-option, .menu-item {
             name: 'ببجي موبايل',
             banner: 'https://i.postimg.cc/SsHRk04T/913282ba48fb727cce0f95f02eeacef1.jpg',
             icon: 'https://i.postimg.cc/2SYq1fZg/IMG.jpg',
-            products: [
-                {
-                    name: '100 UC',
-                    price: '25 جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/pubg-uc.png',
-                    method: 'الشحن: عبر الأيدي'
-                },
-                {
-                    name: '250 UC',
-                    price: '60 جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/pubg-uc.png',
-                    method: 'الشحن: عبر الأيدي'
-                },
-                {
-                    name: '500 UC',
-                    price: '120 جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/pubg-uc.png',
-                    method: 'الشحن: عبر الأيدي'
-                },
-                {
-                    name: '1000 UC',
-                    price: '240 جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/pubg-uc.png',
-                    method: 'الشحن: عبر الأيدي'
-                },
-                {
-                    name: '2500 UC',
-                    price: '600 جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/pubg-uc.png',
-                    method: 'الشحن: عبر الأيدي'
-                },
-                {
-                    name: 'باس موسم',
-                    price: '??? جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/pubg-pass.png',
-                    method: 'الشحن: عبر الحساب',
-                    featured: true
-                }
-            ]
+            products: []
         },
         {
             id: 'cod',
             name: 'كول أوف ديوتي',
             banner: 'https://i.postimg.cc/k5XByFwc/4522b1878b6c2b3acef534afc1e9cb0f.jpg',
             icon: 'https://i.postimg.cc/qgVTZ4rr/images.jpg',
-            products: [
-                {
-                    name: '100 CP',
-                    price: '30 جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/cod-cp.png',
-                    method: 'الشحن: عبر الأيدي'
-                },
-                {
-                    name: '250 CP',
-                    price: '75 جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/cod-cp.png',
-                    method: 'الشحن: عبر الأيدي'
-                },
-                {
-                    name: '500 CP',
-                    price: '150 جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/cod-cp.png',
-                    method: 'الشحن: عبر الأيدي'
-                },
-                {
-                    name: '1000 CP',
-                    price: '300 جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/cod-cp.png',
-                    method: 'الشحن: عبر الأيدي'
-                },
-                {
-                    name: 'باس موسم',
-                    price: '??? جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/cod-pass.png',
-                    method: 'الشحن: عبر الحساب',
-                    featured: true
-                }
-            ]
+            products: []
         },
         {
             id: 'fortnie',
             name: 'روبكلس',
             banner: 'https://i.postimg.cc/9Xqz1fPv/c5c9578fab8ad16a855e4e16871bf359.jpg',
             icon: 'https://i.postimg.cc/zDLHM7N2/IMG.jpg',
-            products: [
-                {
-                    name: '500 V-Bucks',
-                    price: '40 جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-vbucks.png',
-                    method: 'الشحن: عبر الحساب'
-                },
-                {
-                    name: '1000 V-Bucks',
-                    price: '80 جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-vbucks.png',
-                    method: 'الشحن: عبر الحساب'
-                },
-                {
-                    name: '2000 V-Bucks',
-                    price: '160 جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-vbucks.png',
-                    method: 'الشحن: عبر الحساب'
-                },
-                {
-                    name: 'باس موسم',
-                    price: '??? جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-pass.png',
-                    method: 'الشحن: عبر الحساب',
-                    featured: true
-                }
-            ]
+            products: []
         },
         {
             id: 'fortnite',
             name: 'بيس',
             banner: 'https://i.postimg.cc/rmDsBVBR/2509938b0f6b5b83232ac4dd9629d1eb.jpg',
             icon: 'https://i.postimg.cc/zXKbDfVn/IMG.jpg',
-            products: [
-                {
-                    name: '500 V-Bucks',
-                    price: '40 جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-vbucks.png',
-                    method: 'الشحن: عبر الحساب'
-                },
-                {
-                    name: '1000 V-Bucks',
-                    price: '80 جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-vbucks.png',
-                    method: 'الشحن: عبر الحساب'
-                },
-                {
-                    name: '2000 V-Bucks',
-                    price: '160 جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-vbucks.png',
-                    method: 'الشحن: عبر الحساب'
-                },
-                {
-                    name: 'باس موسم',
-                    price: '??? جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-pass.png',
-                    method: 'الشحن: عبر الحساب',
-                    featured: true
-                }
-            ]
+            products: []
         },
     { 
             id: 'Call of Duty',
             name: 'دلتا فروس',
             banner: 'https://i.postimg.cc/3wSWf4cH/e68809ee31fcb80ce44c0274331a2776.jpg',
-            icon: 'https://i.postimg.cc/9Fw0vQ1x/fortnite-icon.jpg',
-            products: [
-                {
-                    name: '500 V-Bucks',
-                    price: '40 جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-vbucks.png',
-                    method: 'الشحن: عبر الحساب'
-                },
-                {
-                    name: '1000 V-Bucks',
-                    price: '80 جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-vbucks.png',
-                    method: 'الشحن: عبر الحساب'
-                },
-                {
-                    name: '2000 V-Bucks',
-                    price: '160 جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-vbucks.png',
-                    method: 'الشحن: عبر الحساب'
-                },
-                {
-                    name: 'باس موسم',
-                    price: '??? جنيه',
-                    image: 'https://i.postimg.cc/fWxQNSRm/fortnite-pass.png',
-                    method: 'الشحن: عبر الحساب',
-                    featured: true
-                }
-            ]
+            icon: 'https://i.postimg.cc/NFC6Mx6M/unnamed.png//',
+            products: []
         }
     ];
 
@@ -2966,6 +3024,22 @@ button, a, .card, .game-option, .menu-item {
     document.addEventListener('DOMContentLoaded', function() {
         initStore();
     });
+    
+    // في بداية الـ script، اضف هذا الكود لجعل الوضع الداكن افتراضي
+document.addEventListener('DOMContentLoaded', function() {
+    // جعل الوضع الداكن افتراضي فقط
+    document.body.classList.add('dark-mode');
+    localStorage.setItem('darkMode', 'true');
+    
+    // لا تستدعي initStore() هنا
+});
+
+// عدل دالة toggleDarkMode لتصبح كالتالي
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    playClickSound(); // إذا كنت تريد صوتاً عند الضغط
+}
 
     // تهيئة المتجر ببيانات الألعاب
     function initStore() {
@@ -3039,7 +3113,11 @@ function updateActiveButtons(gameId) {
                 <button class="buy-button">شراء الآن</button>
             `;
             
-            card.addEventListener('click', () => showPayment(product.name, product.price));
+            card.addEventListener('click', () => showPayment(
+    product.name, 
+    product.price,
+    product.method.includes('الحساب') ? 'account' : 'id'  // تحديد نوع الشحن
+));
             productsContainer.appendChild(card);
         });
     }
@@ -3057,48 +3135,52 @@ function updateActiveButtons(gameId) {
         localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
     }
     
-    function showPayment(product, price) {
-        currentProduct = product;
-        currentPrice = price;
-        document.getElementById('productNameInput').value = product;
-        document.getElementById('productPriceInput').value = price;
-        document.getElementById('gameNameInput').value = currentGame;
-        document.getElementById('paymentScreen').style.display = 'flex';
-        document.body.classList.add('modal-open');
-        resetForm();
-    }
+    function showPayment(product, price, method) {  // أضيف باراميتر method
+    currentProduct = product;
+    currentPrice = price;
+    document.getElementById('productNameInput').value = product;
+    document.getElementById('productPriceInput').value = price;
+    document.getElementById('gameNameInput').value = currentGame;
+    document.getElementById('paymentScreen').style.display = 'flex';
+    document.body.classList.add('modal-open');
+    resetForm();
+    
+    // تخزين طريقة الشحن في متغير عام
+    window.currentPaymentMethod = method;
+}
     
     function hidePayment() {
         document.getElementById('paymentScreen').style.display = 'none';
         document.body.classList.remove('modal-open');
     }
     
-    async function selectGame(gameId) {
-    showLoader(); // عرض شاشة التحميل
-    
-    try {
-        const game = games.find(g => g.id === gameId);
-        if (!game) return;
+function selectGame(gameId) {
+    const game = games.find(g => g.id === gameId);
+    if (!game) return;
 
-        currentGame = game.name;
-        
-        // تحديث الأزرار النشطة
-        document.querySelectorAll('.game-option').forEach(option => {
-            option.classList.toggle('active', option.dataset.game === gameId);
-        });
-        
-        // تحديث البانر
-        const banner = document.getElementById('gameBanner');
-        await loadImage(banner, game.banner);
-        
-        // تحديث المنتجات
+    // تحديث البانر
+    document.getElementById('gameBanner').src = game.banner;
+
+    // مسح المحتوى القديم
+    const productsContainer = document.getElementById('productsContainer');
+    productsContainer.innerHTML = '';
+
+    if (gameId === 'freefire') {
         updateProducts(game.products);
-        
-    } catch (error) {
-        console.error('Error:', error);
-    } finally {
-        hideLoader(); // إخفاء شاشة التحميل
+    } else {
+        const comingSoonMsg = document.createElement('div');
+        comingSoonMsg.className = 'coming-soon';
+        comingSoonMsg.innerHTML = `
+            <div style="margin-bottom: 10px;"></div>
+            ${game.name} قريباً 
+        `;
+        productsContainer.appendChild(comingSoonMsg);
     }
+
+    // تحديث الأزرار النشطة
+    document.querySelectorAll('.game-option').forEach(option => {
+        option.classList.toggle('active', option.dataset.game === gameId);
+    });
 }
 
 // دالة مساعدة لتحميل الصور
@@ -3114,22 +3196,55 @@ function loadImage(element, url) {
     });
 }
     
-    // دالة التحميل المعدلة
-    function showLoader(duration = 2000) {
-        return new Promise((resolve) => {
-            const loader = document.getElementById('loadingOverlay');
-            loader.style.display = 'flex';
+let firstLoad = true;
+
+async function showLoader(duration = 10000) {
+    if (!firstLoad) return Promise.resolve();
+    
+    return new Promise((resolve) => {
+        const loader = document.getElementById('loadingOverlay');
+        if (!loader) return resolve();
+        
+        loader.style.display = 'flex';
+        // إضافة تأخير بسيط قبل إظهار التحريك
+        setTimeout(() => {
             loader.classList.add('active');
             
             setTimeout(() => {
                 loader.classList.remove('active');
                 setTimeout(() => {
                     loader.style.display = 'none';
+                    firstLoad = false;
                     resolve();
                 }, 300);
             }, duration);
-        });
+        }, 50); // تأخير بسيط لضمان تحميل DOM
+    });
+}
+
+// تأكد من استدعاء هذه الدالة عند تحميل الصفحة
+window.addEventListener('DOMContentLoaded', async () => {
+    await showLoader();
+    // تحميل المحتوى بعد انتهاء التحميل
+    loadContent();
+});
+
+
+function loadContent() {
+    // تأكد من أن كل المحتوى قد تم تحميله
+    if (typeof updateGameDisplay === 'function') {
+        updateGameDisplay();
     }
+    // أي كود آخر لتحميل المحتوى
+}
+
+function changeGame(gameId) {
+    currentGame = gameId;
+    // تأكد من أن العناصر موجودة قبل التحديث
+    requestAnimationFrame(() => {
+        updateGameDisplay();
+    });
+}
     
     function showConfirmation() {
         document.getElementById('confirmationScreen').style.display = 'flex';
@@ -3148,9 +3263,10 @@ function loadImage(element, url) {
 }
     
     function hideConfirmation() {
-        document.getElementById('confirmationScreen').style.display = 'none';
-        hidePayment();
-    }
+    document.getElementById('confirmationScreen').style.display = 'none';
+    document.getElementById('accountConfirmationScreen').style.display = 'none';
+    hidePayment();
+}
     
     function showError(message = 'حدث خطأ أثناء إرسال الطلب يرجي التوجه لدعم الفني') {
         document.getElementById('errorMessage').textContent = message;
@@ -3373,7 +3489,13 @@ function loadImage(element, url) {
             }
             
             // عرض رسالة النجاح
-            showConfirmation();
+             showConfirmation();
+            // في نهاية دالة الإرسال الناجح:
+if (window.currentPaymentMethod === 'account') {
+    document.getElementById('accountConfirmationScreen').style.display = 'flex';
+} else {
+    document.getElementById('confirmationScreen').style.display = 'flex';
+}
             
         } catch (error) {
             console.error('Error:', error);
@@ -3383,6 +3505,7 @@ function loadImage(element, url) {
             submitBtn.innerHTML = originalText;
         }
     });
+    
 
     document.getElementById('clanForm').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -3425,6 +3548,7 @@ function loadImage(element, url) {
                 });
             });
             
+            
             const responses = await Promise.all(promises);
             responses.forEach(response => {
                 if (!response.ok) {
@@ -3447,6 +3571,7 @@ function loadImage(element, url) {
             submitBtn.disabled = false;
             submitBtn.innerHTML = originalText;
         }
+        
     });
 </script>
 </body>
