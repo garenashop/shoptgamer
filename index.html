@@ -85,6 +85,99 @@
             align-items: center;
             gap: 5px;
         }
+        
+        .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--vodafone-red);
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+}
+
+.contest-banner {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 2px solid var(--highlight-color);
+}
+
+.contest-content {
+    padding: 0 10px;
+}
+
+.contest-section {
+    margin-bottom: 20px;
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid var(--highlight-color);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.section-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.section-title {
+    margin: 0;
+    font-size: 18px;
+    color: var(--highlight-color);
+}
+
+.section-text {
+    margin: 10px 0 0 0;
+    font-size: 16px;
+}
+
+.contest-rules {
+    padding-right: 20px;
+    margin: 10px 0 0 0;
+}
+
+.contest-rules li {
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.contest-button {
+    background: linear-gradient(to right, #D4AF37, #FFD700);
+    color: #000;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+} 
 
         .highlight {
             color: var(--highlight-color);
@@ -282,6 +375,30 @@
             background-color: rgba(33, 150, 243, 0.1);
         }
 
+/* أضف هذا في قسم الـ CSS */
+.cards {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* تصغير حجم البطاقات */
+    gap: 10px; /* تقليل المسافة بين البطاقات */
+}
+
+.card {
+    padding: 10px; /* تقليل الحشو الداخلي */
+}
+
+.card h2 {
+    font-size: 14px !important; /* تصغير حجم النص */
+    margin-bottom: 5px !important;
+}
+
+.price {
+    font-size: 16px !important; /* تصغير حجم السعر */
+}
+
+.buy-button {
+    padding: 6px 0 !important; /* تصغير حجم الزر */
+    font-size: 12px !important;
+}
+
         .game-icon {
             width: 60px;
             height: 60px;
@@ -367,6 +484,36 @@
           -ms-user-select: none;
           user-select: none;
        }
+       
+       .contest-banner {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 2px solid var(--highlight-color);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.contest-banner:hover {
+    transform: scale(1.02);
+}
+
+/* تأثير تدرج لوني على الصورة */
+.contest-banner-container {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.contest-banner-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+} 
 
        .method {
             font-size: 12px;
@@ -1226,6 +1373,53 @@
            flex-direction: column;
       }
 
+
+.contest-content {
+    padding: 0 5px !important; /* تقليل المسافة الجانبية */
+}
+
+/* تعديل حجم بانر المسابقات */
+.contest-banner {
+    height: 120px !important;  /* تصغير الارتفاع */
+    max-height: 120px !important;
+    object-fit: cover !important;
+    margin-bottom: 15px !important;
+}
+
+
+/* لضبط حجم البانر على الشاشات الصغيرة جدًا */
+@media (max-width: 360px) {
+    .contest-banner {
+        height: 100px !important;
+        max-height: 100px !important;
+    }
+    
+    .game-banner {
+        height: 120px !important;
+        max-height: 120px !important;
+    }
+}
+
+.section-header {
+    margin-bottom: 5px !important;
+    padding-bottom: 5px !important;
+} 
+
+@media (max-width: 480px) {
+    .contest-rules li {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+    }
+    
+    .section-title {
+        font-size: 14px !important;
+    }
+    
+    .contest-button {
+        font-size: 13px !important;
+        padding: 8px 10px !important;
+    }
+}
       body.modal-open {
           overflow: hidden;
           position: fixed;
@@ -1685,7 +1879,7 @@
 }
 
 .card {
-    opacity: 1;
+    opacity: 0;
     transform: translateY(20px);
     animation: cardAppear 0.5s forwards;
 }
@@ -1805,6 +1999,37 @@
     background: none;
 }
 
+/* تعديلات شاشة المسابقات */
+.contests-card {
+    padding: 15px !important; /* تقليل الحشو */
+    max-width: 95% !important; /* جعلها تأخذ مساحة أقل */
+}
+
+.contest-section {
+    padding: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.section-title {
+    font-size: 16px !important; /* تصغير حجم العناوين */
+}
+
+.contest-rules li {
+    font-size: 14px !important; /* تصغير حجم النقاط */
+    margin-bottom: 5px !important;
+    padding-right: 15px !important; /* تقليل المسافة */
+}
+
+.contest-button {
+    padding: 10px 15px !important;
+    font-size: 14px !important;
+}
+
+.button-icon {
+    width: 16px !important;
+    height: 16px !important;
+}
+
 .card.featured .file-upload-btn {
     border: 2px dashed var(--highlight-color) !important;
     background: rgba(33, 150, 243, 0.05) !important;
@@ -1820,6 +2045,59 @@
     border: 1px solid #ddd !important;
     border-radius: 5px !important;
 }
+
+@media (max-width: 480px) {
+    .support-item {
+        flex-direction: column; /* عرض العناصر عموديًا */
+        align-items: flex-start; /* محاذاة للنصوص */
+        padding: 8px 0; /* تقليل المسافة الرأسية */
+    }
+
+    .support-name, .support-number {
+        font-size: 14px; /* تصغير حجم الخط */
+    }
+
+    .whatsapp-btn {
+        margin-top: 5px; /* إضافة مسافة فوق الزر */
+        width: 100%; /* جعل الزر يأخذ العرض بالكامل */
+        justify-content: center; /* توسيط النص والآيقونة */
+    }
+}
+
+
+@media (max-width: 480px) {
+    .payment-card {
+        padding: 15px;
+    }
+
+    .payment-title {
+        font-size: 20px;
+    }
+
+    .form-group input, 
+    .form-group select, 
+    .form-group textarea {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .submit-btn {
+        padding: 12px;
+        font-size: 15px;
+    }
+
+    .vodafone-number {
+        font-size: 18px;
+    }
+}
+
+.payment-screen,
+.support-screen,
+.clan-screen,
+.contests-screen {
+    overscroll-behavior: contain; /* منع التمرير الزائد */
+    -webkit-overflow-scrolling: touch; /* تحسين التمرير على iOS */
+} 
 
 .vodafone-cash-box {
     border: 2px solid var(--vodafone-red) !important;
@@ -2175,6 +2453,143 @@ body {
     /* بقية متغيرات الوضع الداكن... */
 }
 
+/* إضافة هذه الأنماط إلى قسم الـ CSS */
+.contest-timer {
+    background: linear-gradient(to right, #D4AF37, #FFD700);
+    color: #000;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
+}
+
+.timer-icon {
+    font-size: 20px;
+}
+
+.timer-text {
+    font-size: 16px;
+}
+
+#countdown {
+    font-weight: bold;
+    color: #000;
+}
+
+/* تحسين أقسام المسابقة */
+.contest-section {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-left: 4px solid var(--highlight-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contest-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(33, 150, 243, 0.2);
+    padding-bottom: 8px;
+}
+
+.section-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
+}
+
+.section-title {
+    margin: 0;
+    font-size: 18px;
+    color: var(--highlight-color);
+    font-weight: bold;
+}
+
+.contest-rules {
+    padding-right: 20px;
+    margin: 10px 0 0 0;
+    list-style-type: none;
+}
+
+.contest-rules li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-right: 25px;
+    line-height: 1.6;
+}
+
+.contest-rules li:before {
+    content: "•";
+    color: var(--highlight-color);
+    font-weight: bold;
+    position: absolute;
+    right: 0;
+}
+
+/* تحسين زر المشاركة */
+.contest-button {
+    background: linear-gradient(to right, #D4AF37, #FFD700);
+    color: #000;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
+}
+
+.contest-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(212, 175, 55, 0.4);
+}
+
+.contest-button:active {
+    transform: scale(0.98);
+}
+
+.button-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* تأثيرات للوضع الداكن */
+.dark-mode .contest-section {
+    border-left: 4px solid var(--button-bg);
+    background: var(--card-bg);
+}
+
+.dark-mode .contest-rules li:before {
+    color: var(--button-bg);
+}
+
+.dark-mode .contest-button {
+    background: linear-gradient(to right, #8B7500, #FFD700);
+    color: #111;
+}
+
 // أضف هذه الخاصية لصورة الخلفية
 .parallax-bg {
     background-attachment: fixed;
@@ -2342,6 +2757,31 @@ button, a, .card, .game-option, .menu-item {
     margin-bottom: 20px;
     text-shadow: 0 2px 10px rgba(212, 175, 55, 0.5);
     animation: pulse 2s infinite;
+}
+
+@media (max-width: 480px) {
+    .cards {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* بطاقة واحدة في الصف */
+        gap: 10px; /* تقليل المسافة بين البطاقات */
+    }
+
+    .card {
+        padding: 10px; /* تقليل الحشو الداخلي */
+    }
+
+    .card h2 {
+        font-size: 14px !important; /* تصغير حجم النص */
+        margin-bottom: 5px !important;
+    }
+
+    .price {
+        font-size: 16px !important; /* تصغير حجم السعر */
+    }
+
+    .buy-button {
+        padding: 6px 0 !important; /* تصغير حجم الزر */
+        font-size: 12px !important;
+    }
 }
 
 .account-confirm-title {
@@ -2624,21 +3064,11 @@ button, a, .card, .game-option, .menu-item {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/>
             </svg>
-            <span>المسابقات</span>
+                    <span>المسابقات <span class="badge">جديد</span></span>
+                </div>
+            </div>
         </div>
-       </div>
-    </div>
-
-    <div class="contests-screen" id="contestsScreen">
-    <button class="close-contests" onclick="hideContestsScreen()">✕</button>
-    <div class="contests-card">
-        <h2 class="contests-title">المسابقات</h2>
-        <div class="contests-content">
-            <p>لا يوجد مسابقات حالياً</p>
-            <p>تابعنا لمعرفة المسابقات القادمة</p>
-           </div>
-        </div>
-    </div>
+    </header>
     
     </header>
 
@@ -2846,6 +3276,7 @@ button, a, .card, .game-option, .menu-item {
         </div>
     </div>
 
+    <!-- شاشة الكلان -->
     <div class="clan-screen" id="clanScreen">
         <button class="close-clan" onclick="hideClanScreen()">✕</button>
         <div class="clan-card">
@@ -2877,6 +3308,63 @@ button, a, .card, .game-option, .menu-item {
                     إرسال طلب الانضمام
                 </button>
             </form>
+        </div>
+    </div>
+
+    <!-- شاشة المسابقات -->
+    <div class="contests-screen" id="contestsScreen">
+        <button class="close-contests" onclick="hideContestsScreen()">✕</button>
+        <div class="contests-card">
+            <h2 class="contests-title">مسابقة فري فاير الأسبوعية</h2>
+            
+            <img src="https://i.postimg.cc/3NpRwLJK/f6b1bf4d93d61cca87cb4be2ae727193.jpg" alt="مسابقة فري فاير" class="contest-banner">
+            
+            <div class="contest-content">
+                <div class="contest-section">
+                    <div class="section-header">
+                        <img src="https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png" class="section-icon" width="24">
+                        <h3 class="section-title">الشحن:</h3>
+                    </div>
+                    <p class="section-text">عبر الحساب يمكنك اسنخدام ربط</p>
+                </div>
+                
+                <div class="contest-section">
+                    <div class="section-header">
+                        <img src="https://i.postimg.cc/x19YZsDq/IMG.jpg" class="section-icon" width="24">
+                        <h3 class="section-title">الموعد:</h3>
+                    </div>
+                    <p class="section-text"> يوم الأربعاء - 9:00 مساءً</p>
+                </div>
+                
+                <div class="contest-section">
+                    <div class="section-header">
+                        <img src="https://i.postimg.cc/K87kPGpN/Picsart-25-07-10-13-49-30-174.png" class="section-icon" width="24">
+                        <h3 class="section-title">طريقة المشاركة:</h3>
+                    </div>
+                    <ul class="contest-rules">
+                        <li>تواصل معنا على الواتساب: <a href="https://wa.me/201559022132?text=سجلني" style="color: var(--highlight-color);">+201559022132</a></li>
+                        <li>اكتب "سجلني" وأرسل الكود الخاص بك</li>
+                        <li>اشترك في قناتنا على الواتساب: <a href="https://whatsapp.com/channel/0029Vb6PooDLdQeVZgQzpp2T" style="color: var(--highlight-color);">اضغط هنا</a></li>
+                        <li>شارك كودك مع أصدقائك واطلب منهم وضع ❤</li>
+                    </ul>
+                </div>
+                
+                <div class="contest-section">
+                    <div class="section-header">
+                        <img src="https://i.postimg.cc/W4nZvNM3/Picsart-25-07-10-16-32-08-514.png" class="section-icon" width="24">
+                        <h3 class="section-title">قواعد المسابقة:</h3>
+                    </div>
+                    <ul class="contest-rules">
+                        <li>ستنتهي المسابقه عند الساعه 10 في اليوم التاني</li>
+                        <li>الفائز هو صاحب أكبر عدد من ❤ على كوده</li>
+                    </ul>
+                </div>
+                
+                <button class="contest-button" onclick="openWhatsApp('201559022132')">
+                    <img src="https://i.postimg.cc/fWxQNSRm/Picsart-25-07-10-18-53-32-994.png" class="button-icon" width="20">
+                    سجلني الآن
+                </button>
+            </div>
         </div>
     </div>
 
@@ -3306,6 +3794,56 @@ function changeGame(gameId) {
     function hideClanScreen() {
         document.getElementById('clanScreen').style.display = 'none';
     }
+    
+    // دالة لعرض شاشة المسابقات
+function showContestsScreen() {
+    document.getElementById('contestsScreen').style.display = 'flex';
+    document.querySelector('.menu-dropdown').classList.remove('active');
+    document.querySelector('.menu-button').classList.remove('active');
+    playClickSound();
+}
+
+// دالة لإخفاء شاشة المسابقات
+function hideContestsScreen() {
+    document.getElementById('contestsScreen').style.display = 'none';
+    playClickSound();
+}
+
+// دالة لفتح الواتساب برقم محدد (للمسابقة)
+function openContestWhatsApp() {
+    window.open('https://wa.me/201505977367', '_blank');
+    playClickSound();
+}
+
+// تحديث دالة toggleMenu لإضافة صوت النقرة
+function toggleMenu() {
+    const menuButton = document.querySelector('.menu-button');
+    const menuDropdown = document.querySelector('.menu-dropdown');
+    
+    menuButton.classList.toggle('active');
+    menuDropdown.classList.toggle('active');
+    playClickSound();
+}
+
+// دالة لتشغيل صوت النقرة
+function playClickSound() {
+    const clickSound = document.getElementById('clickSound');
+    if (clickSound) {
+        clickSound.currentTime = 0;
+        clickSound.play().catch(e => console.log('Cannot play sound:', e));
+    }
+}
+
+// عند تحميل الصفحة، إخفاء شاشة المسابقات
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('contestsScreen').style.display = 'none';
+    
+    // إضافة مستمع حدث لزر المشاركة في المسابقة
+    const contestButton = document.querySelector('.contest-button');
+    if (contestButton) {
+        contestButton.addEventListener('click', openContestWhatsApp);
+    }
+});
     
     function copyVodafoneNumber() {
         const number = document.getElementById('vodafoneNumber').textContent;
